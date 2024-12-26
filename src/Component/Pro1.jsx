@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 
 const imageUrls = [
@@ -31,12 +30,12 @@ export const Pro1 = () => {
       {imageUrls.map((url, index) => (
         <div
           key={index}
-          className="flex flex-col justify-center items-center bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+          className="flex flex-col justify-center items-center bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:rotate-360"
         >
           <img
             src={url}
             alt={titles[index]}
-            className="w-[100px] h-auto object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+            className="w-[100px] h-auto object-cover rounded-lg transition-transform duration-300 hover:scale-105 hover:	transform: rotate(180deg);"
           />
           <p className="text-center text-sm mt-2 font-medium">{titles[index]}</p>
           <button
@@ -48,6 +47,5 @@ export const Pro1 = () => {
         </div>
       ))}
     </div>
-  );  
-  
+  );
 };

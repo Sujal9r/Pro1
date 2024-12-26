@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosSearch } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
+import { SlLogout } from "react-icons/sl";
 import { FaUserTie } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Banner from './assets/Banner.png'; 
@@ -33,8 +33,8 @@ export const Header = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="flex items-center justify-between w-full">
-        <div className="flex items-center gap-6">
+      <div className="flex flex-wrap items-center justify-between w-full">
+        <div className="flex flex-wrap justify-center items-center gap-6">
           <div className="relative flex items-center">
             <img
               src={Banner}
@@ -68,8 +68,8 @@ export const Header = () => {
             onClick={reDirect}
             className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white rounded-lg hover:bg-white hover:text-purple-700 transition-all"
           >
-            <CgProfile className="text-2xl" />
-            <span>Sign in</span>
+            <SlLogout className="text-2xl font-bold" />
+            <span>Log out</span>
           </button>
           <button className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white rounded-lg hover:bg-white hover:text-purple-700 transition-all">
             <FaUserTie className="text-2xl" />

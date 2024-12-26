@@ -44,11 +44,11 @@ const Slider = () => {
   useEffect(() => {
     startAutoSlide();
     return () => stopAutoSlide();
-  }, []);
+  },);
 
   return (
     <div
-      className="relative w-full mx-auto bg-sky-200 p-4 rounded-lg shadow-lg overflow-hidden "
+      className="relative w-full mx-auto bg-sky-200 p-4 shadow-lg overflow-hidden "
       onMouseEnter={stopAutoSlide}
       onMouseLeave={startAutoSlide}
     >

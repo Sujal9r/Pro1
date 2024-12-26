@@ -36,7 +36,6 @@ export const Footer = () => {
         <div className='mb-6 md:w-1/5'>
           <h3 className='text-white font-bold mb-4'>Consumer Policy</h3>
           <ul>
-            <li><a className='hover:text-yellow-100'></a></li>
             <li><a className='hover:text-yellow-200'>Terms Of Use</a></li>
             <li><a className='hover:text-yellow-300'>Security</a></li>
             <li><a className='hover:text-yellow-400'>Privacy</a></li>
@@ -58,9 +57,9 @@ export const Footer = () => {
       <div className='bg-gray-800 text-center py-4 border-t border-gray-700'>
         <p className='text-sm'>&copy; 2025-2050 S9rtechnologies.com</p>
         <div className='flex justify-center gap-4 mt-2'>
-          <a  className='text-gray-300 hover:text-pink-500'>&#9675; Instagram</a>
+          <a  href='https://www.instagram.com/s9r_technologies/' className='text-gray-300 hover:text-pink-500'>&#9675; Instagram</a> 
           <a  className='text-gray-300 hover:text-blue-500'>&#9675; Twitter</a>
-          <a  className='text-gray-300 hover:text-red-800'>&#9675; YouTube</a>
+          <a  className='text-gray-100 hover:text-red-800'>&#9675; YouTube</a>
         </div>
         <div className='flex justify-center gap-4 mt-4'>
           <img src='https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/payment-method-c454fb.svg' alt='' className='h-8' />

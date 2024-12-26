@@ -7,3 +7,62 @@
     padding: 0;
     
 }
+
+@keyframes sliderAnimation {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-slider {
+    display: flex;
+    animation: sliderAnimation 20s linear infinite;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .flex-none {
+    flex: none;
+  }
+  
+  .w-32 {
+    width: 8rem;
+  }
+  
+  .md\\:w-40 {
+    width: 10rem;
+  }
+  
+  .h-32 {
+    height: 8rem;
+  }
+  
+  .md\\:h-40 {
+    height: 10rem;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .text-purple-600 {
+    color: #805ad5;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
