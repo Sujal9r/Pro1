@@ -15,9 +15,18 @@ const images = [
 
 const Slider2 = () => {
   return (
-    <section className="flex justify-center items-center">
-      <div className="relative w-full max-w-8xl overflow-hidden">
-        <div className="flex animate-slider">
+    <section className="flex flex-col justify-center items-center p-12 bg-sky-100">
+      <h2 className="text-xl md:text-3xl font-bold text-center mb-6">
+        <span className="text-purple-500">Languages</span> we work on
+      </h2>
+      <span
+  className="bg-gradient-to-r from-sky-500 via-purple-500 to-gray-500 text-white p-4">
+  S9r Technology adheres to current technological trends and ensures that our team is knowledgeable
+  about them so that they can assist you in developing your solution using the most cutting-edge
+  technology stack.
+</span>
+      <div className="relative w-full max-w-full overflow-hidden">
+        <div className="flex animate-slider space-x-10">
           {images.concat(images).map((image, index) => (
             <div
               key={index}

@@ -19,7 +19,7 @@
   
   .animate-slider {
     display: flex;
-    animation: sliderAnimation 20s linear infinite;
+    animation: sliderAnimation 10s linear infinite;
   }
   
   .flex {

@@ -3,7 +3,7 @@ import React from 'react';
 const developerTypes = [
   {
     type: 'Frontend Developer',
-    description: 'Expert in building interactive user interfaces using modern frameworks like React and Angular.',
+    description: 'Expert in building interactive UI using modern frameworks like React.',
     icon: '🖌️',
   },
   {
@@ -25,7 +25,7 @@ const developerTypes = [
 
 export const Developer = () => {
   return (
-    <div className="bg-gray-100 flex flex-col items-center p-3 hover:to-blue-400">
+    <div className="bg-gray-100 flex flex-col items-center p-12 hover:to-blue-400">
       <h1 className="text-3xl font-bold mb-8 "><span className='text-purple-500'>Developers</span> We Have</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {developerTypes.map((dev, index) => (
