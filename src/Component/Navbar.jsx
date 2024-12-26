@@ -25,7 +25,7 @@ export const Header = () => {
 
   return (
     <header
-      className="h-[120px] flex items-center px-6 shadow-md"
+      className="flex items-center px-4 lg:px-6 py-4 shadow-md"
       style={{
         backgroundImage: `linear-gradient(to right, #6a11cb, #2575fc)`,
         backgroundSize: 'cover',
@@ -33,28 +33,26 @@ export const Header = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="flex flex-wrap items-center justify-between w-full">
-        <div className="flex flex-wrap justify-center items-center gap-6">
-          <div className="relative flex items-center">
-            <img
-              src={Banner}
-              alt="Logo"
-              className="h-[100px] w-[180px] rounded-md" 
-            />
+      <div className="flex flex-col lg:flex-row items-center justify-between w-full">
+        {/* Left Section */}
+        <div className="flex flex-col lg:flex-row items-center gap-4 w-full lg:w-auto">
+          <img
+            src={Banner}
+            alt="Logo"
+            className="h-[80px] w-[140px] lg:h-[100px] lg:w-[180px] rounded-md"
+          />
+
+          <div className="text-center lg:text-left">
+            <h1 className="text-white font-bold text-lg lg:text-xl">
+              Welcome, <span className="text-yellow-300">{formData.username}</span>!
+            </h1>
+            <p className="text-gray-200 text-xs lg:text-sm">
+              Explore amazing deals and offers tailored just for you.
+            </p>
           </div>
 
-          <div className="relative ml-4">
-            <div className="text-center">
-              <h1 className="text-white font-bold text-xl animate-fadeIn">
-                Welcome, <span className="text-yellow-300">{formData.username}</span>!
-              </h1>
-              <p className="text-gray-200 text-sm">
-                Explore amazing deals and offers tailored just for you.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 bg-white bg-opacity-80 w-[500px] h-12 px-4 rounded-lg shadow-lg">
-            <IoIosSearch className="text-2xl text-gray-500" />
+          <div className="relative flex items-center bg-white bg-opacity-80 w-full lg:w-[350px] h-10 px-3 rounded-lg shadow-lg">
+            <IoIosSearch className="text-xl text-gray-500" />
             <input
               className="bg-transparent w-full border-none outline-none text-sm placeholder-gray-500"
               type="text"
@@ -63,16 +61,17 @@ export const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-white ml-auto">
+        {/* Right Section */}
+        <div className="flex items-center gap-2 lg:gap-4 mt-4 lg:mt-0">
           <button
             onClick={reDirect}
-            className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white rounded-lg hover:bg-white hover:text-purple-700 transition-all"
+            className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base"
           >
-            <SlLogout className="text-2xl font-bold" />
+            <SlLogout className="text-xl lg:text-2xl" />
             <span>Log out</span>
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-transparent border border-white rounded-lg hover:bg-white hover:text-purple-700 transition-all">
-            <FaUserTie className="text-2xl" />
+          <button className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base">
+            <FaUserTie className="text-xl lg:text-2xl" />
             <span>Hire Developer</span>
           </button>
         </div>
