@@ -15,7 +15,7 @@ const images = [
 
 const Slider2 = () => {
   return (
-    <section className="flex flex-col justify-center items-center p-12 bg-sky-100">
+    <section className="flex flex-col justify-center items-center p-12 bg-purple-200">
       <h2 className="text-xl md:text-3xl font-bold text-center mb-6">
         <span className="text-purple-500">Languages</span> we work on
       </h2>

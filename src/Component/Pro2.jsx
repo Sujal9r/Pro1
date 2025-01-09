@@ -47,7 +47,7 @@ export const Pro2 = () => {
   ];
 
   return (
-    <div className="bg-blue-50 py-12">
+    <div className="bg-sky-400 py-12">
       <h2 className="text-center text-3xl font-bold mb-4">
         Why <span className="text-purple-600">Choose Us</span>
       </h2>

@@ -5,7 +5,7 @@ import { FaUserTie } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Banner from './assets/Banner.png'; 
 
-export const Header = () => {
+export const Header = ({Redirect}) => {
   const [formData, setFormData] = useState({
     username: 'Guest',
   });
@@ -70,9 +70,9 @@ export const Header = () => {
             <SlLogout className="text-xl lg:text-2xl" />
             <span>Log out</span>
           </button>
-          <button className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base">
+          <button onClick={Redirect} className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base">
             <FaUserTie className="text-xl lg:text-2xl" />
-            <span>Hire Developer</span>
+            <span>Hire Developer</span> 
           </button>
         </div>
       </div>

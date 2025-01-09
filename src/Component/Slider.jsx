@@ -4,19 +4,23 @@ import "tailwindcss/tailwind.css";
 const Slider = () => {
   const slidesData = [
     {
-      imgSrc: "https://www.proglobalbusinesssolutions.com/wp-content/uploads/2019/03/Photography-Web-Banner.jpg",
+      imgSrc:
+        "https://www.proglobalbusinesssolutions.com/wp-content/uploads/2019/03/Photography-Web-Banner.jpg",
       title: "Capture And Apply Solution",
     },
     {
-      imgSrc: "https://www.internetcreation.net/wp-content/uploads/2015/10/banner-web-design.png",
+      imgSrc:
+        "https://www.internetcreation.net/wp-content/uploads/2015/10/banner-web-design.png",
       title: "Web Designing",
     },
     {
-      imgSrc: "https://bloggingheros.com/wp-content/uploads/2020/03/website-design-1.jpg",
-      title: "Cordination Power",
+      imgSrc:
+        "https://bloggingheros.com/wp-content/uploads/2020/03/website-design-1.jpg",
+      title: "Coordination Power",
     },
     {
-      imgSrc: "https://oceanbirdacademy.co.zw/wp-content/uploads/2024/04/webdesign_banner.jpg",
+      imgSrc:
+        "https://oceanbirdacademy.co.zw/wp-content/uploads/2024/04/webdesign_banner.jpg",
       title: "Turn Thinking into Reality",
     },
   ];
@@ -44,11 +48,11 @@ const Slider = () => {
   useEffect(() => {
     startAutoSlide();
     return () => stopAutoSlide();
-  },);
+  }, );
 
   return (
     <div
-      className="relative w-full mx-auto bg-sky-200 p-4 shadow-lg overflow-hidden "
+      className="relative w-full mx-auto bg-sky-200 p-10 shadow-lg rounded-md overflow-hidden"
       onMouseEnter={stopAutoSlide}
       onMouseLeave={startAutoSlide}
     >
@@ -59,19 +63,16 @@ const Slider = () => {
         {slidesData.map((slide, index) => (
           <div
             key={index}
-            className="flex-none w-full flex flex-col items-center p-2"
+            className="flex-none w-full flex flex-col items-center p-8"
           >
             <img
               src={slide.imgSrc}
               alt={slide.title}
-              className="w-full h-[200px] md:h-[400px] object-cover rounded-md mb-4"
+              className="w-full h-[200px] md:h-[400px] object-cover rounded-md space-x-5"
             />
-            <h2 className="text-lg md:text-2xl font-bold text-gray-800">
+            <h2 className="mt-4 text-lg md:text-2xl font-bold text-gray-800">
               {slide.title}
             </h2>
-            <p className="text-sm md:text-base text-gray-600 text-center">
-              {slide.description}
-            </p>
           </div>
         ))}
       </div>
@@ -82,7 +83,7 @@ const Slider = () => {
           prevSlide();
           startAutoSlide();
         }}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg shadow-lg focus:outline-none"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-purple-500 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg focus:outline-none"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -99,13 +100,14 @@ const Slider = () => {
           />
         </svg>
       </button>
+
       <button
         onClick={() => {
           stopAutoSlide();
           nextSlide();
           startAutoSlide();
         }}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg shadow-lg focus:outline-none"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-purple-500 hover:bg-purple-700 text-white p-3 rounded-full shadow-lg focus:outline-none"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -127,10 +129,10 @@ const Slider = () => {
         {slidesData.map((_, index) => (
           <div
             key={index}
-            className={`h-2 w-8 cursor-pointer ${
+            className={`h-3 w-3 md:w-4 md:h-4 cursor-pointer ${
               index === currentIndex
-                ? "bg-blue-500 scale-110"
-                : "bg-gray-300"
+                ? "bg-purple-600 scale-110"
+                : "bg-sky-400"
             } rounded-full transition-all duration-300`}
             onClick={() => setCurrentIndex(index)}
           ></div>

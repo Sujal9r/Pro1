@@ -19,7 +19,7 @@
   
   .animate-slider {
     display: flex;
-    animation: sliderAnimation 10s linear infinite;
+    animation: sliderAnimation 40s linear infinite;
   }
   
   .flex {
@@ -66,3 +66,106 @@
     font-weight: 600;
   }
   
+
+.flip-card {
+  width: 220px; 
+  height: 420px;
+  perspective: 1000px; 
+  margin: 1rem; 
+}
+
+.flip-card-short {
+  width: 220px; 
+  height: 220px; 
+  perspective: 1000px; 
+  margin: 1rem;   
+}
+
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.flip-card-short-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-short:hover .flip-card-short-inner {
+  transform: rotateY(-180deg);
+}
+
+.flip-card-front,
+.flip-card-short-front,
+
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hides the back of the card */
+  border-radius: 16px; /* Adds rounded corners */
+  overflow: hidden;
+}
+.flip-card-short-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hides the back of the card */
+  border-radius: 16px; /* Adds rounded corners */
+  overflow: hidden;
+}
+
+.flip-card-front {
+  background-color: #f0f0f0;
+}
+.flip-card-short-front {
+  background-color: #f0f0f0; 
+}
+
+.flip-card-back {
+  background-color: #a580c0; 
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg); 
+}
+.flip-card-short-back {
+  background-color: #805ad5; 
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg); 
+}
+
+.flip-card-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+.flip-card-short-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+}
+
+@media screen and (max-width: 640px) {
+  .flip-card {
+    width: 180px;
+    height: 240px;
+  }
+  .flip-card-inner {
+    transition: transform 0.5s ease-in-out;
+  }
+}
