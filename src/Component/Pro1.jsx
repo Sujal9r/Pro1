@@ -24,7 +24,7 @@ const titles = [
 
 export const Pro1 = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-8 p-3">
+    <div className="flex flex-wrap justify-center gap-8 p-3 bg-purple-300">
       {imageUrls.map((url, index) => (
         <div
           key={index}

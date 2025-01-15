@@ -11,6 +11,7 @@ export const Header = ({ Redirect }) => {
   });
 
   const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,10 +38,8 @@ export const Header = ({ Redirect }) => {
     const endColor = "#34eb83"; 
     const stop1 = Math.min(scrollPercentage, 30); 
     const stop2 = Math.min(scrollPercentage, 70); 
-  
     return `linear-gradient(to right, ${startColor} ${stop1}%, ${midColor} ${stop2}%, ${endColor} 100%)`;
   };
-  
 
   const handleLoginRedirect = () => {
     navigate("/Login");
@@ -62,16 +61,14 @@ export const Header = ({ Redirect }) => {
 
   return (
     <header
-      className={`flex items-center px-4 lg:px-6 py-4 shadow-md`}
+      className={`flex items-center px-4 lg:px-6 py-4 shadow-md ${window.innerWidth < 640 ? "" : "sticky top-0 z-50"}`}
       style={{
         background: getGradientStyle(),
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
         transition: "background 0.5s ease",
       }}
     >
       <div className="flex flex-col lg:flex-row items-center justify-between w-full">
+        {/* Logo and Username */}
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
           <img
             src={Banner}
@@ -85,6 +82,7 @@ export const Header = ({ Redirect }) => {
           </div>
         </div>
 
+        {/* Desktop Navigation */}
         <div className="hidden sm:flex gap-3 lg:gap-5 items-center relative">
           {navItems.map((item, index) => (
             <div
@@ -132,6 +130,36 @@ export const Header = ({ Redirect }) => {
           ))}
         </div>
 
+        {/* Hamburger Menu (Mobile) */}
+        <div className={`sm:hidden ${isMenuOpen ? "block" : "hidden"} absolute top-0 left-0 right-0 bg-gray-800 bg-opacity-90 z-40`}>
+          <div className="flex flex-col gap-4 p-6">
+            {navItems.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => !item.dropdown && navigate(item.path)}
+                className="cursor-pointer text-white hover:text-purple-300 transition-colors"
+              >
+                {item.label}
+              </div>
+            ))}
+            <button
+              onClick={() => setIsMenuOpen(false)} 
+              className="text-white text-xl mt-4"
+            >
+              ✖ Close
+            </button>
+          </div>
+        </div>
+
+        {/* Hamburger Icon */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="sm:hidden text-white text-3xl"
+        >
+          {isMenuOpen ? "✖" : "☰"}
+        </button>
+
+        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mt-4 sm:mt-0">
           <button
             onClick={Redirect}
