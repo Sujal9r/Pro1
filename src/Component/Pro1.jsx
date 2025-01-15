@@ -7,9 +7,8 @@ const imageUrls = [
   'https://media.licdn.com/dms/image/C5112AQE7nKMEG8NUDA/article-cover_image-shrink_720_1280/0/1561300973072?e=2147483647&v=beta&t=glv2S27Kx_oHB9ReKS4jBmoxdWolpT5z7AAnflIBLko',
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54MEA3KhgLf0bofI_4zcRjng2oEWCnExQHA&s',
   'https://environment-review.yale.edu/sites/default/files/vanessa-bucceri-gdirwiyama8-unsplash.jpg',
-  'https://www.graficasorvy.com/sites/default/files/tickets.jpg',
-  'https://cdni.autocarindia.com/Utils/ImageResizer.ashx?n=http://img.haymarketsac.in/autocarpro/0add6cde-611a-4e0c-a946-c3c6037126c1.jpg&w=750&h=490&q=75&c=1',
-  'https://www.travelite.com/media/c8/e2/c7/1692284003/fliegen.webp'
+  'https://thelaunchcenter.org/wp-content/uploads/2023/09/programming-background-with-person-working-with-codes-computer-1024x683.jpg',
+  'https://blog-cdn.codefinity.com/images/a4b453d2-02a5-48be-ae1a-49e8b6b8df70_ae746dc3a3b94a80b6a173c269313e29.png.png'
 ];
 
 const titles = [
@@ -19,7 +18,6 @@ const titles = [
   'Innovation',
   'Cloud Solution',
   'Data Analytics',
-  'Blockchain',
   'Training',
   'Education'
 ];

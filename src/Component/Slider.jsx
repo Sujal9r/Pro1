@@ -10,6 +10,16 @@ const Slider = () => {
     },
     {
       imgSrc:
+        "https://icsil.in/sites/default/files/2019-10/slider01.jpg",
+      title: "Software Development Company",
+    },
+    {
+      imgSrc:
+        "https://next-tech.in/wp-content/uploads/2020/08/future-tech.jpg",
+      title: "Software Development Company",
+    },
+    {
+      imgSrc:
         "https://www.internetcreation.net/wp-content/uploads/2015/10/banner-web-design.png",
       title: "Web Designing",
     },
@@ -38,7 +48,7 @@ const Slider = () => {
   };
 
   const startAutoSlide = () => {
-    slideInterval.current = setInterval(nextSlide, 3000);
+    slideInterval.current = setInterval(nextSlide, 2000);
   };
 
   const stopAutoSlide = () => {

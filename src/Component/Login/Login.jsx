@@ -14,7 +14,7 @@ const Login = () => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const user = users.find((user) => user.email === email && user.password === password);
     if (user) {
-      navigate('/landing');
+      navigate('/');
     } else {
       setError('Invalid email or password');
     }

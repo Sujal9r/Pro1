@@ -51,6 +51,7 @@ export const Developer = () => {
 
 const reDirect = () => {
   navigate('/hiring');
+  window.scrollTo(0, 0);
 };
 
   return (

@@ -1,78 +1,126 @@
-import React, { useEffect, useState } from 'react';
-import { IoIosSearch } from "react-icons/io";
+import React, { useEffect, useState } from "react";
 import { SlLogout } from "react-icons/sl";
 import { FaUserTie } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
-import Banner from './assets/Banner.png'; 
+import { useNavigate } from "react-router-dom";
+import Banner from "./assets/Banner.png";
 
-export const Header = ({Redirect}) => {
+export const Header = ({ Redirect }) => {
   const [formData, setFormData] = useState({
-    username: 'Guest',
+    username: "Guest",
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const users = JSON.parse(localStorage.getItem("users")) || [];
     if (users.length > 0) {
       setFormData({ username: users[users.length - 1].username });
     }
   }, []);
 
-  const navigate = useNavigate();
-
-  const reDirect = () => {
-    navigate('/');
+  const handleLoginRedirect = () => {
+    navigate("/Login");
   };
+
+  const navItems = [
+    { label: "Home", path: "/", hoverColor: "purple" },
+    { label: "Services", path: "/services", hoverColor: "purple", dropdown: true },
+    { label: "Industries", path: "/industries", hoverColor: "purple", dropdown: true },
+    { label: "Portfolio", path: "/portfolio", hoverColor: "purple" },
+    { label: "Career", path: "/career", hoverColor: "purple" },
+  ];
+
+  const dropdownItems = [
+    { label: "Web Development", description: "Modern web solutions" },
+    { label: "App Development", description: "Scalable mobile apps" },
+    { label: "Digital Marketing", description: "Boost your brand" },
+  ];
 
   return (
     <header
       className="flex items-center px-4 lg:px-6 py-4 shadow-md"
       style={{
         backgroundImage: `linear-gradient(to right, #6a11cb, #2575fc)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="flex flex-col lg:flex-row items-center justify-between w-full">
-        {/* Left Section */}
         <div className="flex flex-col lg:flex-row items-center gap-4 w-full lg:w-auto">
           <img
             src={Banner}
             alt="Logo"
             className="h-[80px] w-[140px] lg:h-[100px] lg:w-[180px] rounded-md"
           />
-
           <div className="text-center lg:text-left">
             <h1 className="text-white font-bold text-lg lg:text-xl">
-              Welcome, <span className="text-yellow-300">{formData.username}</span>!
+              Welcome,{" "}
+              <span className="text-yellow-300">{formData.username}</span>!
             </h1>
-            <p className="text-gray-200 text-xs lg:text-sm">
-              Explore amazing deals and offers tailored just for you.
-            </p>
-          </div>
-
-          <div className="relative flex items-center bg-white bg-opacity-80 w-full lg:w-[350px] h-10 px-3 rounded-lg shadow-lg">
-            <IoIosSearch className="text-xl text-gray-500" />
-            <input
-              className="bg-transparent w-full border-none outline-none text-sm placeholder-gray-500"
-              type="text"
-              placeholder="Search for Products, Brands, and More"
-            />
           </div>
         </div>
 
-        {/* Right Section */}
+        <div className="flex gap-5 items-center relative">
+          {navItems.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => !item.dropdown && navigate(item.path)}
+              className={`cursor-pointer relative group text-white hover:text-${item.hoverColor}-500 transition-colors`}
+            >
+              {item.label}
+              {item.dropdown && (
+                <span className="ml-1">▼</span>
+              )}
+              <span
+                className={`absolute left-0 bottom-0 w-0 h-1 bg-${item.hoverColor}-500 transition-all group-hover:w-full`}
+              ></span>
+
+              {/* Dropdown Menu */}
+              {item.dropdown && (
+                <div className="hidden group-hover:flex absolute top-full mt-2 left-0 bg-white text-gray-800 rounded-lg shadow-lg p-6 w-[400px]">
+                  <div className="flex gap-4">
+                    <img
+                      src="https://via.placeholder.com/100"
+                      alt="Dropdown Image"
+                      className="h-24 w-24 rounded-lg shadow"
+                    />
+                    <div className="grid grid-cols-1 gap-2">
+                      {dropdownItems.map((dropdownItem, i) => (
+                        <div
+                          key={i}
+                          className="p-2 hover:bg-gray-100 rounded-lg transition"
+                        >
+                          <h4 className="font-bold text-sm text-blue-800">
+                            {dropdownItem.label}
+                          </h4>
+                          <p className="text-xs text-gray-600">
+                            {dropdownItem.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
         <div className="flex items-center gap-2 lg:gap-4 mt-4 lg:mt-0">
           <button
-            onClick={reDirect}
+            onClick={Redirect}
+            className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base"
+          >
+            <FaUserTie className="text-xl lg:text-2xl" />
+            <span>Hire Developer</span>
+          </button>
+          <button
+            onClick={handleLoginRedirect}
             className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base"
           >
             <SlLogout className="text-xl lg:text-2xl" />
-            <span>Log out</span>
-          </button>
-          <button onClick={Redirect} className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white rounded-lg text-white hover:bg-white hover:text-purple-700 transition-all text-sm lg:text-base">
-            <FaUserTie className="text-xl lg:text-2xl" />
-            <span>Hire Developer</span> 
+            <span>Login</span>
           </button>
         </div>
       </div>
