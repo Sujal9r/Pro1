@@ -106,7 +106,7 @@ export const Header = ({ Redirect }) => {
                 <div className="hidden group-hover:flex absolute top-auto transform translate-y-2 left-0 bg-white text-gray-800 rounded-lg shadow-lg p-6 w-[300px] sm:w-[400px]">
                   <div className="flex flex-col sm:flex-row gap-4">
                     <img
-                      src="https://via.placeholder.com/100"
+                      src="https://t3.ftcdn.net/jpg/05/66/39/78/360_F_566397830_Eyld3KDOWRcqsQUWuZmC94jiiyud2Vv1.jpg"
                       alt="Dropdown Image"
                       className="h-20 w-20 sm:h-24 sm:w-24 rounded-lg shadow"
                     />
