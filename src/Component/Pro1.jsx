@@ -1,49 +1,93 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import { MdSearchOff } from "react-icons/md";
 
-const imageUrls = [
-  'https://media.istockphoto.com/id/1449032425/photo/shopping-bag-full-of-healthy-food-on-blue.jpg?s=612x612&w=0&k=20&c=856XpqRgq8Bj9Mr28VzAdW-iTyHEj_dW01m6SPPHsOU=',
-  'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
-  'https://hips.hearstapps.com/hmg-prod/images/summer-trends-1647373704.png',
-  'https://media.licdn.com/dms/image/C5112AQE7nKMEG8NUDA/article-cover_image-shrink_720_1280/0/1561300973072?e=2147483647&v=beta&t=glv2S27Kx_oHB9ReKS4jBmoxdWolpT5z7AAnflIBLko',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54MEA3KhgLf0bofI_4zcRjng2oEWCnExQHA&s',
-  'https://environment-review.yale.edu/sites/default/files/vanessa-bucceri-gdirwiyama8-unsplash.jpg',
-  'https://thelaunchcenter.org/wp-content/uploads/2023/09/programming-background-with-person-working-with-codes-computer-1024x683.jpg',
-  'https://blog-cdn.codefinity.com/images/a4b453d2-02a5-48be-ae1a-49e8b6b8df70_ae746dc3a3b94a80b6a173c269313e29.png.png'
-];
+const Pro1 = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
-const titles = [
-  'UI/UX Pages',
-  'Our Branch',
-  'Employees',
-  'Innovation',
-  'Cloud Solution',
-  'Data Analytics',
-  'Training',
-  'Education'
-];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
 
-export const Pro1 = () => {
+        const updatedProducts = data.map((product) => ({
+          ...product,
+          quantity: Math.floor(Math.random() * 5) + 1,
+        }));
+
+        setProducts(updatedProducts);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-wrap justify-center gap-8 p-3 bg-purple-300">
-      {imageUrls.map((url, index) => (
-        <div
-          key={index}
-          className="flex flex-col justify-center items-center bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:rotate-360"
-        >
-          <img
-            src={url}
-            alt={titles[index]}
-            className="w-[100px] h-auto object-cover rounded-lg transition-transform duration-300 hover:scale-105 hover:	transform: rotate(180deg);"
-          />
-          <p className="text-center text-sm mt-2 font-medium">{titles[index]}</p>
-          <button
-            className="mt-3 px-4 py-2 rounded-full text-white font-bold bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-purple-500 hover:to-indigo-500 hover:shadow-lg transition-all duration-300"
-            onClick={() => alert(`You clicked on ${titles[index]}`)}
-          >
-            Explore
-          </button>
+    <div className="p-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+      <div className="flex justify-end mb-4">
+        <input
+          placeholder="Search..."
+          className="p-3 rounded-xl border border-gray-300 text-gray-800 focus:ring-2 focus:ring-blue-400"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <h2 className="text-3xl font-bold text-center mb-6 flex items-center justify-center gap-2">
+        <FaShoppingCart /> Product List
+      </h2>
+      
+      {filteredProducts.length === 0 ? (
+        <div className="flex flex-col items-center justify-center mt-10">
+          <MdSearchOff className="text-6xl text-gray-300" />
+          <p className="text-lg mt-2 text-gray-300">Product Not Found</p>
         </div>
-      ))}
+      ) : (
+        <div className="overflow-x-auto whitespace-nowrap">
+          <div className="flex space-x-6 p-4">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow border border-gray-300 min-w-[250px] text-gray-800"
+              >
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-32 object-contain bg-gray-200 p-2 rounded-md"
+                />
+                <div className="mt-2 text-center text-sm">
+                  <h4 className="font-semibold truncate">{product.title.substring(0, 15)}...</h4>
+                  <p className="text-gray-600">₹{product.price}</p>
+                  <p className="text-gray-600">Qty: {product.quantity}</p>
+                  <p className="text-green-500 font-semibold">
+                    Total: ₹{(product.price * product.quantity).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
+export default Pro1;
