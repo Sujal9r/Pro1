@@ -115,15 +115,15 @@ export const Header = ({ Redirect }) => {
 
         {/* Username - Center aligned on mobile */}
         <div className="sm:hidden mx-auto">
-          <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-gray-800' : 'text-white'} transition-colors duration-300`}>
-            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+          <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-white' : 'text-sky-200'} transition-colors duration-300`}>
+            Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
           </h1>
         </div>
 
         {/* Desktop username - shown only on desktop/tablet */}
         <div className="hidden sm:block ml-4">
-          <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-gray-800' : 'text-white'} transition-colors duration-300`}>
-            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+          <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-sky-200' : 'text-white'} transition-colors duration-300`}>
+            Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
           </h1>
         </div>
 

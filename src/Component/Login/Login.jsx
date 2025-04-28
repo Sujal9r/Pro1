@@ -36,9 +36,7 @@ const Login = () => {
   };
 
   const handleSocialLogin = (provider) => {
-    // This would typically integrate with OAuth providers
     console.log(`Login with ${provider}`);
-    // Mock social login for demonstration
     alert(`${provider} login would be implemented here with OAuth`);
   };
 
