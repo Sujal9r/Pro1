@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { SlLogout } from "react-icons/sl";
 import { FaUserTie } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +9,11 @@ export const Header = ({ Redirect }) => {
     username: "Guest",
   });
 
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoverItem, setHoverItem] = useState(null);
+  const hoverTimeoutRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,27 +24,48 @@ export const Header = ({ Redirect }) => {
 
     const handleScroll = () => {
       const scrollTop = window.scrollY;
+      setScrollPosition(scrollTop);
+      
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
       const percentage = (scrollTop / (docHeight - winHeight)) * 100;
-      setScrollPercentage(Math.min(percentage, 100)); 
+      setScrollPercentage(Math.min(percentage, 100));
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    };
   }, []);
 
   const getGradientStyle = () => {
-    const startColor = "#6a11cb"; 
-    const midColor = "#2575fc"; 
-    const endColor = "#34eb83"; 
-    const stop1 = Math.min(scrollPercentage, 30); 
-    const stop2 = Math.min(scrollPercentage, 70); 
+    if (scrollPosition < 20) {
+      return 'transparent';
+    }
+    
+    const startColor = "#6a11cb";
+    const midColor = "#2575fc";
+    const endColor = "#34eb83";
+    const stop1 = Math.min(scrollPercentage, 30);
+    const stop2 = Math.min(scrollPercentage, 70);
     return `linear-gradient(to right, ${startColor} ${stop1}%, ${midColor} ${stop2}%, ${endColor} 100%)`;
   };
 
   const handleLoginRedirect = () => {
     navigate("/Login");
+  };
+
+  const handleMouseEnter = (label) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setHoverItem(label);
+  };
+
+  const handleMouseLeave = () => {
+    // Add delay before closing dropdown
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoverItem(null);
+    }, 300);
   };
 
   const navItems = [
@@ -53,44 +76,70 @@ export const Header = ({ Redirect }) => {
     { label: "Career", path: "/career", hoverColor: "purple" },
   ];
 
-  const dropdownItems = [
-    { label: "Web Development", description: "Modern web solutions" },
-    { label: "App Development", description: "Scalable mobile apps" },
-    { label: "Digital Marketing", description: "Boost your brand" },
-  ];
+  const dropdownItems = {
+    Services: [
+      { label: "Web Development", description: "Modern web solutions", icon: "💻" },
+      { label: "App Development", description: "Scalable mobile apps", icon: "📱" },
+      { label: "Digital Marketing", description: "Boost your brand", icon: "📈" },
+      { label: "UI/UX Design", description: "Beautiful user experiences", icon: "🎨" },
+    ],
+    Industries: [
+      { label: "Healthcare", description: "Medical solutions", icon: "🏥" },
+      { label: "Finance", description: "Banking & fintech", icon: "💰" },
+      { label: "Education", description: "EdTech platforms", icon: "🎓" },
+      { label: "E-Commerce", description: "Online retail solutions", icon: "🛒" },
+    ]
+  };
 
   return (
     <header
-      className={`flex items-center px-4 lg:px-6 py-4 shadow-md ${window.innerWidth < 640 ? "" : "sticky top-0 z-50"}`}
+      className={`flex items-center px-4 lg:px-6 py-2 fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrollPosition > 20 ? "shadow-md py-3" : "py-4"
+      }`}
       style={{
         background: getGradientStyle(),
-        transition: "background 0.5s ease",
+        backdropFilter: scrollPosition > 20 ? "blur(8px)" : "none",
+        transition: "all 0.5s ease",
       }}
     >
-      <div className="flex flex-col lg:flex-row items-center justify-between w-full">
-        {/* Logo and Username */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+      <div className="flex items-center justify-between w-full">
+        {/* Logo - Left aligned */}
+        <div className="relative overflow-hidden rounded-md">
           <img
             src={Banner}
             alt="Logo"
-            className="h-[60px] w-[120px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] rounded-md"
+            className="h-[60px] w-[120px] sm:h-[80px] sm:w-[140px] lg:h-[80px] lg:w-[160px] transition-transform duration-300 hover:scale-110"
           />
-          <div className="text-center lg:text-left">
-            <h1 className={`font-bold text-base sm:text-lg lg:text-xl text-white`}>
-              Welcome, <span className="text-yellow-300">{formData.username}</span>!
-            </h1>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
+        </div>
+
+        {/* Username - Center aligned on mobile */}
+        <div className="sm:hidden mx-auto">
+          <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-gray-800' : 'text-white'} transition-colors duration-300`}>
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+          </h1>
+        </div>
+
+        {/* Desktop username - shown only on desktop/tablet */}
+        <div className="hidden sm:block ml-4">
+          <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-gray-800' : 'text-white'} transition-colors duration-300`}>
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+          </h1>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden sm:flex gap-3 lg:gap-5 items-center relative">
+        <div className="hidden sm:flex gap-3 lg:gap-5 items-center relative ml-auto mr-4">
           {navItems.map((item, index) => (
             <div
               key={index}
               onClick={() => !item.dropdown && navigate(item.path)}
-              className="cursor-pointer relative group text-white hover:text-purple-300 transition-colors"
+              onMouseEnter={() => handleMouseEnter(item.dropdown ? item.label : null)}
+              onMouseLeave={handleMouseLeave}
+              className="cursor-pointer relative group"
             >
-              <span className="flex items-center">
+              <span className={`flex items-center transition-colors duration-300 ${
+                scrollPosition < 20 ? 'text-sky-200' : 'text-white'
+              } hover:text-purple-300`}>
                 {item.label}
                 {item.dropdown && (
                   <span className="ml-1 transform transition-transform duration-300 group-hover:rotate-180">
@@ -100,24 +149,30 @@ export const Header = ({ Redirect }) => {
               </span>
               <span className="absolute left-0 bottom-0 w-0 h-1 bg-purple-300 transition-all group-hover:w-full"></span>
 
-              {item.dropdown && (
-                <div className="hidden group-hover:flex absolute top-auto transform translate-y-2 left-0 bg-white text-gray-800 rounded-lg shadow-lg p-6 w-[300px] sm:w-[400px]">
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <img
-                      src="https://t3.ftcdn.net/jpg/05/66/39/78/360_F_566397830_Eyld3KDOWRcqsQUWuZmC94jiiyud2Vv1.jpg"
-                      alt="Dropdown Image"
-                      className="h-20 w-20 sm:h-24 sm:w-24 rounded-lg shadow"
-                    />
-                    <div className="grid grid-cols-1 gap-2">
-                      {dropdownItems.map((dropdownItem, i) => (
+              {item.dropdown && hoverItem === item.label && (
+                <div 
+                  className="absolute top-auto transform translate-y-2 left-0 bg-white bg-opacity-95 backdrop-blur-sm text-gray-800 rounded-lg shadow-lg p-6 w-[300px] sm:w-[400px] z-50"
+                  onMouseEnter={() => handleMouseEnter(item.label)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="font-bold text-purple-700">{item.label}</h3>
+                      <div className="h-1 w-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {dropdownItems[item.label].map((dropdownItem, i) => (
                         <div
                           key={i}
-                          className="p-2 hover:bg-gray-100 rounded-lg transition"
+                          className="p-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 rounded-lg transition group/item border border-transparent hover:border-purple-100"
                         >
-                          <h4 className="font-bold text-sm text-blue-800">
-                            {dropdownItem.label}
-                          </h4>
-                          <p className="text-xs text-gray-600">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg">{dropdownItem.icon}</span>
+                            <h4 className="font-bold text-sm text-blue-800 group-hover/item:text-purple-700 transition-colors">
+                              {dropdownItem.label}
+                            </h4>
+                          </div>
+                          <p className="text-xs text-gray-600 mt-1 pl-7">
                             {dropdownItem.description}
                           </p>
                         </div>
@@ -130,53 +185,163 @@ export const Header = ({ Redirect }) => {
           ))}
         </div>
 
-        {/* Hamburger Menu (Mobile) */}
-        <div className={`sm:hidden ${isMenuOpen ? "block" : "hidden"} absolute top-0 left-0 right-0 bg-gray-800 bg-opacity-90 z-40`}>
-          <div className="flex flex-col gap-4 p-6">
-            {navItems.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => !item.dropdown && navigate(item.path)}
-                className="cursor-pointer text-white hover:text-purple-300 transition-colors"
+        {/* Mobile Menu */}
+        <div 
+          className={`sm:hidden fixed top-0 left-0 w-full h-screen bg-gradient-to-b from-purple-900 via-blue-800 to-teal-700 z-50 transition-transform duration-300 ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col gap-4 p-6 h-full">
+            <div className="flex justify-between items-center mb-8">
+              <img src={Banner} alt="Logo" className="h-[60px] w-[120px] rounded-md" />
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="text-white text-xl bg-purple-800 p-2 rounded-full hover:bg-purple-700 transition-colors"
               >
-                {item.label}
-              </div>
-            ))}
-            <button
-              onClick={() => setIsMenuOpen(false)} 
-              className="text-white text-xl mt-4"
-            >
-              ✖ Close
-            </button>
+                ✖
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-6">
+              {navItems.map((item, index) => (
+                <div key={index} className="border-b border-purple-700 pb-4">
+                  <div
+                    onClick={() => {
+                      if (!item.dropdown) {
+                        navigate(item.path);
+                        setIsMenuOpen(false);
+                      }
+                    }}
+                    className="cursor-pointer text-white text-lg font-medium flex justify-between items-center"
+                  >
+                    {item.label}
+                    {item.dropdown && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setHoverItem(hoverItem === item.label ? null : item.label);
+                        }}
+                        className="bg-purple-700 p-1 rounded-full text-sm"
+                      >
+                        {hoverItem === item.label ? "-" : "+"}
+                      </button>
+                    )}
+                  </div>
+                  
+                  {item.dropdown && hoverItem === item.label && (
+                    <div className="mt-3 ml-4 space-y-3">
+                      {dropdownItems[item.label].map((dropdownItem, i) => (
+                        <div
+                          key={i}
+                          className="p-2 bg-purple-800 bg-opacity-50 rounded-lg"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span>{dropdownItem.icon}</span>
+                            <h4 className="font-bold text-sm text-white">
+                              {dropdownItem.label}
+                            </h4>
+                          </div>
+                          <p className="text-xs text-purple-200 mt-1 ml-6">
+                            {dropdownItem.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-auto flex flex-col gap-4">
+              <button
+                onClick={() => {
+                  Redirect();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all"
+              >
+                <FaUserTie className="text-xl" />
+                <span>Hire Developer</span>
+              </button>
+              <button
+                onClick={() => {
+                  handleLoginRedirect();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-white bg-opacity-10 text-white rounded-lg hover:bg-opacity-20 transition-all"
+              >
+                <SlLogout className="text-xl" />
+                <span>Login</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Hamburger Icon */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="sm:hidden text-white text-3xl"
-        >
-          {isMenuOpen ? "✖" : "☰"}
-        </button>
+        {/* Hamburger Icon - Right aligned */}
+        <div className="sm:hidden flex items-center ml-auto">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="relative p-3 focus:outline-none group"
+            aria-label="Toggle navigation menu"
+          >
+            <div className="flex flex-col justify-center items-center">
+              <span
+                className={`block w-6 h-0.5 rounded-full transition-all duration-300 ease-in-out ${
+                  scrollPosition < 20 ? 'bg-gray-800' : 'bg-white'
+                } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              ></span>
+              <span
+                className={`block w-8 h-0.5 rounded-full transition-all duration-300 ease-in-out mt-1.5 ${
+                  scrollPosition < 20 ? 'bg-purple-600' : 'bg-purple-300'
+                } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              ></span>
+              <span
+                className={`block w-4 h-0.5 rounded-full transition-all duration-300 ease-in-out mt-1.5 ml-auto ${
+                  scrollPosition < 20 ? 'bg-blue-500' : 'bg-blue-300'
+                } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}
+              ></span>
+            </div>
+            
+            {/* Animated circle background on hover */}
+            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+            
+            {/* Pulse effect */}
+            <span className={`absolute inset-0 rounded-full ${isMenuOpen ? '' : 'animate-ping'} bg-purple-500 opacity-0 group-hover:opacity-10 transition-all duration-300`}></span>
+          </button>
+        </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mt-4 sm:mt-0">
+        {/* Action Buttons (Desktop) */}
+        <div className="hidden sm:flex items-center gap-4">
           <button
             onClick={Redirect}
-            className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white text-white rounded-lg hover:bg-purple-800 hover:text-white transition-all text-xs sm:text-sm lg:text-base"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+              scrollPosition < 20 
+                ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-lg' 
+                : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
+            }`}
           >
-            <FaUserTie className="text-lg sm:text-xl lg:text-2xl" />
+            <FaUserTie className="text-lg lg:text-xl" />
             <span>Hire Developer</span>
           </button>
           <button
             onClick={handleLoginRedirect}
-            className="flex items-center gap-2 px-3 py-2 bg-transparent border border-white text-white rounded-lg hover:bg-purple-800 hover:text-white transition-all text-xs sm:text-sm lg:text-base"
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+              scrollPosition < 20 
+                ? 'bg-white shadow-md text-purple-800 hover:shadow-lg' 
+                : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
+            }`}
           >
-            <SlLogout className="text-lg sm:text-xl lg:text-2xl" />
+            <SlLogout className="text-lg lg:text-xl" />
             <span>Login</span>
           </button>
         </div>
       </div>
+      
+      {/* Scroll Progress Indicator */}
+      <div 
+        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 via-blue-400 to-green-300" 
+        style={{ width: `${scrollPercentage}%`, transition: 'width 0.2s ease' }}
+      ></div>
     </header>
   );
 };
