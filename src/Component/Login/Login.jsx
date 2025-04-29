@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-purple-400">
-        <div className="flex w-full max-w-[900px] bg-white shadow-lg shadow-purple-500 border-purple-500 border-[2px] flex-col md:flex-row">
+        <div className="flex w-full max-h-[50%] max-w-[900px] bg-white shadow-lg shadow-purple-500 border-purple-500 border-[2px] flex-col md:flex-row">
           <div className="w-full md:w-1/2 p-6 md:p-10 order-2 md:order-1">
             <h1 className="text-3xl font-bold text-gray-800">Sign in</h1>
             <p className="text-gray-600">
@@ -115,7 +115,7 @@ const Login = () => {
                 <button 
                   type="button"
                   onClick={() => handleSocialLogin('Google')}
-                  className="flex items-center justify-center border border-purple-500 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-center border border-purple-500 py-2.5 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                   <img
                     src="https://static.cdnlogo.com/logos/g/38/google-icon.svg"
@@ -127,7 +127,7 @@ const Login = () => {
                 <button 
                   type="button"
                   onClick={() => handleSocialLogin('Facebook')}
-                  className="flex items-center justify-center border border-purple-500 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-center border border-purple-500 py-2.5 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/768px-Facebook_Logo_2023.png"

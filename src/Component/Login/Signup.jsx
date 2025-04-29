@@ -61,17 +61,10 @@ const SignUp = () => {
     navigate('/login');
   };
 
-  const handleSocialLogin = (provider) => {
-    // This would typically integrate with OAuth providers
-    console.log(`Login with ${provider}`);
-    // Mock social login for demonstration
-    alert(`${provider} login would be implemented here with OAuth`);
-  };
-
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-sky-400">
-        <div className="flex w-full max-w-[900px] bg-white shadow-lg shadow-sky-500 border-sky-500 border-[2px] flex-col md:flex-row">
+        <div className="h-[50%] flex w-full max-w-[900px] bg-white shadow-lg shadow-sky-500 border-sky-500 border-[2px] flex-col md:flex-row">
           <div className="w-full md:w-1/2 p-6 md:p-10 order-2 md:order-1">
             <h1 className="text-3xl font-bold text-gray-800">Create Account</h1>
             <p className="text-gray-600">
@@ -164,37 +157,6 @@ const SignUp = () => {
               >
                 Create Account
               </button>
-              
-              <div className="mt-6 text-center text-gray-600">
-                <p>or</p>
-              </div>
-              
-              <div className="mt-4 flex flex-col space-y-2">
-                <button 
-                  type="button"
-                  onClick={() => handleSocialLogin('Google')}
-                  className="flex items-center justify-center border border-sky-500 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  <img
-                    src="https://static.cdnlogo.com/logos/g/38/google-icon.svg"
-                    alt="Google"
-                    className="w-5 h-5 mr-2"
-                  />
-                  Continue with Google
-                </button>
-                <button 
-                  type="button"
-                  onClick={() => handleSocialLogin('Facebook')}
-                  className="flex items-center justify-center border border-sky-500 py-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/768px-Facebook_Logo_2023.png"
-                    alt="Facebook"
-                    className="w-5 h-5 mr-2"
-                  />
-                  Continue with Facebook
-                </button>
-              </div>
             </form>
           </div>
 

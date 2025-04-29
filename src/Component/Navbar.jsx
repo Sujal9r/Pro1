@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { SlLogout } from "react-icons/sl";
 import { FaUserTie } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Banner from "./assets/Banner.png";
+import Logo from "./assets/S9r_technology.png";
 
 export const Header = ({ Redirect }) => {
   const [formData, setFormData] = useState({
@@ -56,6 +56,10 @@ export const Header = ({ Redirect }) => {
     navigate("/Login");
   };
 
+  const handleSigninRedirect = () => {
+    navigate("/signup");
+  };
+
   const handleMouseEnter = (label) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setHoverItem(label);
@@ -106,9 +110,9 @@ export const Header = ({ Redirect }) => {
         {/* Logo - Left aligned */}
         <div className="relative overflow-hidden rounded-md">
           <img
-            src={Banner}
+            src={Logo}
             alt="Logo"
-            className="h-[60px] w-[120px] sm:h-[80px] sm:w-[140px] lg:h-[80px] lg:w-[160px] transition-transform duration-300 hover:scale-110"
+            className="h-[80px] w-[140px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] transition-transform duration-300 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
         </div>
@@ -193,7 +197,7 @@ export const Header = ({ Redirect }) => {
         >
           <div className="flex flex-col gap-4 p-6 h-full">
             <div className="flex justify-between items-center mb-8">
-              <img src={Banner} alt="Logo" className="h-[60px] w-[120px] rounded-md" />
+              <img src={Logo} alt="Logo" className="h-[60px] w-[120px] rounded-md" />
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="text-white text-xl bg-purple-800 p-2 rounded-full hover:bg-purple-700 transition-colors"
@@ -255,13 +259,13 @@ export const Header = ({ Redirect }) => {
             <div className="mt-auto flex flex-col gap-4">
               <button
                 onClick={() => {
-                  Redirect();
+                  handleSigninRedirect();
                   setIsMenuOpen(false);
                 }}
                 className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all"
               >
                 <FaUserTie className="text-xl" />
-                <span>Hire Developer</span>
+                <span>Sign Up</span>
               </button>
               <button
                 onClick={() => {
@@ -313,7 +317,7 @@ export const Header = ({ Redirect }) => {
         {/* Action Buttons (Desktop) */}
         <div className="hidden sm:flex items-center gap-4">
           <button
-            onClick={Redirect}
+            onClick={handleSigninRedirect}
             className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
               scrollPosition < 20 
                 ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-lg' 
@@ -321,7 +325,7 @@ export const Header = ({ Redirect }) => {
             }`}
           >
             <FaUserTie className="text-lg lg:text-xl" />
-            <span>Hire Developer</span>
+            <span>Sign up</span>
           </button>
           <button
             onClick={handleLoginRedirect}
