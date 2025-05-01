@@ -8,7 +8,7 @@ export const Header = ({ Redirect }) => {
   const [formData, setFormData] = useState({
     username: "Guest",
   });
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,9 +17,18 @@ export const Header = ({ Redirect }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    if (users.length > 0) {
-      setFormData({ username: users[users.length - 1].username });
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || 
+      JSON.parse(sessionStorage.getItem("currentUser"));
+    
+    if (currentUser) {
+      setFormData({ username: currentUser.username });
+      setIsLoggedIn(true);
+    } else {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      if (users.length > 0) {
+        setFormData({ username: users[users.length - 1].username });
+      }
+      setIsLoggedIn(false);
     }
 
     const handleScroll = () => {
@@ -38,6 +47,16 @@ export const Header = ({ Redirect }) => {
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     };
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    sessionStorage.removeItem("currentUser");
+    
+    setIsLoggedIn(false);
+    setFormData({ username: "Guest" });
+    
+    navigate("/login");
+  };
 
   const getGradientStyle = () => {
     if (scrollPosition < 20) {
@@ -66,7 +85,6 @@ export const Header = ({ Redirect }) => {
   };
 
   const handleMouseLeave = () => {
-    // Add delay before closing dropdown
     hoverTimeoutRef.current = setTimeout(() => {
       setHoverItem(null);
     }, 300);
@@ -107,7 +125,6 @@ export const Header = ({ Redirect }) => {
       }}
     >
       <div className="flex items-center justify-between w-full">
-        {/* Logo - Left aligned */}
         <div className="relative overflow-hidden rounded-md">
           <img
             src={Logo}
@@ -117,21 +134,18 @@ export const Header = ({ Redirect }) => {
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
         </div>
 
-        {/* Username - Center aligned on mobile */}
         <div className="sm:hidden mx-auto">
           <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-white' : 'text-sky-200'} transition-colors duration-300`}>
             Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
           </h1>
         </div>
 
-        {/* Desktop username - shown only on desktop/tablet */}
         <div className="hidden sm:block ml-4">
           <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-sky-200' : 'text-white'} transition-colors duration-300`}>
             Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
           </h1>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="hidden sm:flex gap-3 lg:gap-5 items-center relative ml-auto mr-4">
           {navItems.map((item, index) => (
             <div
@@ -189,7 +203,6 @@ export const Header = ({ Redirect }) => {
           ))}
         </div>
 
-        {/* Mobile Menu */}
         <div 
           className={`sm:hidden fixed top-0 left-0 w-full h-screen bg-gradient-to-b from-purple-900 via-blue-800 to-teal-700 z-50 transition-transform duration-300 ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -257,31 +270,45 @@ export const Header = ({ Redirect }) => {
             </div>
             
             <div className="mt-auto flex flex-col gap-4">
-              <button
-                onClick={() => {
-                  handleSigninRedirect();
-                  setIsMenuOpen(false);
-                }}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all"
-              >
-                <FaUserTie className="text-xl" />
-                <span>Sign Up</span>
-              </button>
-              <button
-                onClick={() => {
-                  handleLoginRedirect();
-                  setIsMenuOpen(false);
-                }}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-white bg-opacity-10 text-white rounded-lg hover:bg-opacity-20 transition-all"
-              >
-                <SlLogout className="text-xl" />
-                <span>Login</span>
-              </button>
+              {isLoggedIn ? (
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-red-600 to-orange-500 text-white rounded-lg hover:from-red-700 hover:to-orange-600 transition-all"
+                >
+                  <SlLogout className="text-xl" />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      handleSigninRedirect();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white rounded-lg hover:from-purple-700 hover:to-blue-600 transition-all"
+                  >
+                    <FaUserTie className="text-xl" />
+                    <span>Sign Up</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleLoginRedirect();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center justify-center gap-2 px-4 py-3 bg-white bg-opacity-10 text-white rounded-lg hover:bg-opacity-20 transition-all"
+                  >
+                    <SlLogout className="text-xl" />
+                    <span>Login</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
 
-        {/* Hamburger Icon - Right aligned */}
         <div className="sm:hidden flex items-center ml-auto">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -306,42 +333,54 @@ export const Header = ({ Redirect }) => {
               ></span>
             </div>
             
-            {/* Animated circle background on hover */}
             <span className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
             
-            {/* Pulse effect */}
             <span className={`absolute inset-0 rounded-full ${isMenuOpen ? '' : 'animate-ping'} bg-purple-500 opacity-0 group-hover:opacity-10 transition-all duration-300`}></span>
           </button>
         </div>
 
-        {/* Action Buttons (Desktop) */}
         <div className="hidden sm:flex items-center gap-4">
-          <button
-            onClick={handleSigninRedirect}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
-              scrollPosition < 20 
-                ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-lg' 
-                : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
-            }`}
-          >
-            <FaUserTie className="text-lg lg:text-xl" />
-            <span>Sign up</span>
-          </button>
-          <button
-            onClick={handleLoginRedirect}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
-              scrollPosition < 20 
-                ? 'bg-white shadow-md text-purple-800 hover:shadow-lg' 
-                : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
-            }`}
-          >
-            <SlLogout className="text-lg lg:text-xl" />
-            <span>Login</span>
-          </button>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+                scrollPosition < 20 
+                  ? 'bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-lg' 
+                  : 'bg-transparent border border-white text-white hover:bg-red-500'
+              }`}
+            >
+              <SlLogout className="text-lg lg:text-xl" />
+              <span>Logout</span>
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={handleSigninRedirect}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+                  scrollPosition < 20 
+                    ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-lg' 
+                    : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
+                }`}
+              >
+                <FaUserTie className="text-lg lg:text-xl" />
+                <span>Sign up</span>
+              </button>
+              <button
+                onClick={handleLoginRedirect}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+                  scrollPosition < 20 
+                    ? 'bg-white shadow-md text-purple-800 hover:shadow-lg' 
+                    : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
+                }`}
+              >
+                <SlLogout className="text-lg lg:text-xl" />
+                <span>Login</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
       
-      {/* Scroll Progress Indicator */}
       <div 
         className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 via-blue-400 to-green-300" 
         style={{ width: `${scrollPercentage}%`, transition: 'width 0.2s ease' }}
