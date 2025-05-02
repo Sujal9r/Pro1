@@ -66,18 +66,18 @@ export const Portfolio = () => {
             className="text-center max-w-4xl"
             style={{ transform: `translateY(${-scrollY * 0.3}px)` }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
+            <h1 className="text-3xl md:text-6xl font-bold mb-6 text-white tracking-tight">
               <span className="block transform transition-transform duration-500 hover:scale-105">Creative Excellence</span>
-              <span className="block mt-2 text-3xl md:text-5xl text-blue-200">Your Vision, Our Expertise</span>
+              <span className="block mt-2 text-2xl md:text-5xl text-blue-200">Your Vision, Our Expertise</span>
             </h1>
-            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
               Turning innovative ideas into stunning digital experiences that stand out in today's competitive landscape.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm md:text-base">
                 View Portfolio
               </button>
-              <button className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transform transition-all duration-300 hover:scale-105">
+              <button className="bg-transparent border-2 border-white text-white font-bold py-2 md:py-3 px-6 md:px-8 rounded-full hover:bg-white/10 transform transition-all duration-300 hover:scale-105 text-sm md:text-base">
                 Contact Us
               </button>
             </div>
@@ -88,24 +88,24 @@ export const Portfolio = () => {
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
           style={{ opacity: Math.max(0, 1 - scrollY * 0.01) }}
         >
-          <div className="w-10 h-10 flex items-center justify-center rounded-full bg-white/30 backdrop-blur-md">
-            <span className="text-white text-2xl">↓</span>
+          <div className="w-8 md:w-10 h-8 md:h-10 flex items-center justify-center rounded-full bg-white/30 backdrop-blur-md">
+            <span className="text-white text-xl md:text-2xl">↓</span>
           </div>
         </div>
       </section>
 
       <section 
         ref={addSectionRef}
-        className="py-20 bg-gradient-to-br from-gray-900 to-blue-900"
+        className="py-16 md:py-20 bg-gradient-to-br from-gray-900 to-blue-900"
       >
-        <div className="container mx-auto px-6">
-          <div className={`text-center mb-16 transition-all duration-1000 ${getAnimationClass(0)}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Expertise</h2>
-            <div className="w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
-            <p className="text-gray-300 max-w-2xl mx-auto">We transform ideas into remarkable digital experiences through our comprehensive suite of services.</p>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${getAnimationClass(0)}`}>
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Our Expertise</h2>
+            <div className="w-16 md:w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
+            <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">We transform ideas into remarkable digital experiences through our comprehensive suite of services.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {[
               {
                 icon: "🎨",
@@ -131,16 +131,16 @@ export const Portfolio = () => {
             ].map((service, index) => (
               <div 
                 key={index}
-                className={`bg-white/5 backdrop-blur-lg rounded-xl p-8 transform transition-all duration-700 delay-${index * 200} hover:scale-105 hover:shadow-xl ${getAnimationClass(0)}`}
+                className={`bg-white/5 backdrop-blur-lg rounded-xl p-4 md:p-8 transform transition-all duration-700 delay-${index * 200} hover:scale-105 hover:shadow-xl ${getAnimationClass(0)}`}
               >
-                <div className="mb-6 rounded-lg overflow-hidden">
-                  <img src={service.image} alt={service.title} className="w-full h-40 object-cover" />
+                <div className="mb-4 md:mb-6 rounded-lg overflow-hidden">
+                  <img src={service.image} alt={service.title} className="w-full h-32 md:h-40 object-cover" />
                 </div>
-                <div className={`bg-gradient-to-br ${service.color} w-16 h-16 rounded-lg flex items-center justify-center mb-6 shadow-lg`}>
-                  <span className="text-2xl">{service.icon}</span>
+                <div className={`bg-gradient-to-br ${service.color} w-12 h-12 md:w-16 md:h-16 rounded-lg flex items-center justify-center mb-4 md:mb-6 shadow-lg`}>
+                  <span className="text-xl md:text-2xl">{service.icon}</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-gray-300">{service.desc}</p>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-4">{service.title}</h3>
+                <p className="text-sm md:text-base text-gray-300">{service.desc}</p>
               </div>
             ))}
           </div>
@@ -149,16 +149,16 @@ export const Portfolio = () => {
 
       <section 
         ref={addSectionRef}
-        className="py-20 bg-gray-100"
+        className="py-16 md:py-20 bg-indigo-300"
       >
-        <div className="container mx-auto px-6">
-          <div className={`text-center mb-16 transition-all duration-1000 ${getAnimationClass(1)}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Featured Work</h2>
-            <div className="w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">Explore our latest projects and see how we've helped clients achieve their digital goals.</p>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${getAnimationClass(1)}`}>
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Featured Work</h2>
+            <div className="w-16 md:w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">Explore our latest projects and see how we've helped clients achieve their digital goals.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {[
               { title: "Modern E-commerce", category: "Web Design", image: "https://i.ytimg.com/vi/3l8Lob4ysI0/maxresdefault.jpg" },
               { title: "Finance Dashboard", category: "UI/UX", image: "https://www.geckoboard.com/uploads/Cashflow-dashboard-example.png" },
@@ -178,10 +178,10 @@ export const Portfolio = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                  <span className="text-blue-300 font-medium mb-2">{project.category}</span>
-                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                  <button className="mt-4 text-white border-b-2 border-blue-400 inline-block self-start pb-1 hover:border-white transition-colors duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+                  <span className="text-xs md:text-sm text-blue-300 font-medium mb-1 md:mb-2">{project.category}</span>
+                  <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">{project.title}</h3>
+                  <button className="mt-2 md:mt-4 text-sm md:text-base text-white border-b-2 border-blue-400 inline-block self-start pb-1 hover:border-white transition-colors duration-300">
                     View Project
                   </button>
                 </div>
@@ -189,8 +189,8 @@ export const Portfolio = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <button className="bg-gray-800 text-white px-8 py-3 rounded-full hover:bg-gray-700 transition-all duration-300 transform hover:scale-105">
+          <div className="text-center mt-8 md:mt-12">
+            <button className="bg-gray-800 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
               View All Projects
             </button>
           </div>
@@ -199,16 +199,16 @@ export const Portfolio = () => {
 
       <section 
         ref={addSectionRef}
-        className="py-20 bg-gradient-to-br from-blue-800 to-indigo-900"
+        className="py-16 md:py-20 bg-gradient-to-br from-blue-800 to-indigo-900"
       >
-        <div className="container mx-auto px-6">
-          <div className={`text-center mb-16 transition-all duration-1000 ${getAnimationClass(2)}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
-            <div className="w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
-            <p className="text-blue-100 max-w-2xl mx-auto">Our talented professionals bring creativity, expertise, and passion to every project.</p>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${getAnimationClass(2)}`}>
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Meet Our Team</h2>
+            <div className="w-16 md:w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
+            <p className="text-sm md:text-base text-blue-100 max-w-2xl mx-auto">Our talented professionals bring creativity, expertise, and passion to every project.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { name: "Alex Thompson", role: "Creative Director", image: "https://img.freepik.com/free-photo/businessman-black-suit-with-tie-posing_114579-15877.jpg?semt=ais_hybrid&w=740" },
               { name: "Sarah Chen", role: "Lead Developer", image: "https://media.istockphoto.com/id/995745018/photo/portrait-of-afro-girl-in-eyeglasses.jpg?s=612x612&w=0&k=20&c=REq3ZFh_hSTIz9Serg18vojyrYmid17s4neVfRmDi30=" },
@@ -226,14 +226,14 @@ export const Portfolio = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                  <p className="text-blue-200">{member.role}</p>
-                  <div className="flex space-x-4 mt-4">
-                    <div href="#" className="text-blue-300 hover:text-white transition-colors">
+                <div className="p-3 md:p-6">
+                  <h3 className="text-base md:text-xl font-bold text-white">{member.name}</h3>
+                  <p className="text-xs md:text-base text-blue-200">{member.role}</p>
+                  <div className="flex space-x-3 md:space-x-4 mt-2 md:mt-4">
+                    <div href="#" className="text-blue-300 hover:text-white transition-colors text-sm md:text-base">
                       <span>🔗</span>
                     </div>
-                    <div href="#" className="text-blue-300 hover:text-white transition-colors">
+                    <div href="#" className="text-blue-300 hover:text-white transition-colors text-sm md:text-base">
                       <span>📧</span>
                     </div>
                   </div>
@@ -246,39 +246,39 @@ export const Portfolio = () => {
 
       <section 
         ref={addSectionRef}
-        className="py-20 bg-gray-100"
+        className="py-16 md:py-20 bg-gray-100"
       >
-        <div className="container mx-auto px-6">
-          <div className={`text-center mb-16 transition-all duration-1000 ${getAnimationClass(3)}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Client Testimonials</h2>
-            <div className="w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">What our clients say about working with our team.</p>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${getAnimationClass(3)}`}>
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-800 mb-4">Client Testimonials</h2>
+            <div className="w-16 md:w-20 h-1 bg-blue-500 mx-auto mb-6"></div>
+            <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">What our clients say about working with our team.</p>
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className={`bg-white rounded-2xl shadow-xl p-8 md:p-10 transition-all duration-1000 ${getAnimationClass(3)}`}>
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10">
-                <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-lg">
+            <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-10 transition-all duration-1000 ${getAnimationClass(3)}`}>
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-10">
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 shadow-lg">
                   <img src="https://media.istockphoto.com/id/2063799507/photo/business-portrait-and-black-man-in-city-outdoor-for-career-or-job-of-businessman-face.jpg?s=612x612&w=0&k=20&c=DB5oXy7_aasPbpr7zfpfV92ZYsPIQfFWLyweKEz_UVs=" alt="Client" className="w-full h-full object-cover" />
                 </div>
                 <div>
-                  <svg className="h-8 w-8 text-blue-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="h-6 w-6 md:h-8 md:w-8 text-blue-500 mb-3 md:mb-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
-                  <p className="text-gray-700 text-lg mb-6 italic">
+                  <p className="text-sm md:text-lg text-gray-700 mb-4 md:mb-6 italic">
                     "Working with S9r Technology team has been an absolute pleasure. Their attention to detail and creative approach exceeded our expectations. The final product perfectly captured our brand's essence while meeting all our technical requirements."
                   </p>
                   <div>
-                    <h4 className="font-bold text-gray-900">Tanish</h4>
-                    <p className="text-blue-600">Marketing Director, TechVision Inc.</p>
+                    <h4 className="font-bold text-gray-900 text-base md:text-lg">Tanish</h4>
+                    <p className="text-xs md:text-base text-blue-600">Marketing Director, TechVision Inc.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-center mt-8 gap-2">
+            <div className="flex justify-center mt-6 md:mt-8 gap-2">
               {[0, 1, 2].map(i => (
-                <button key={i} className={`w-3 h-3 rounded-full ${i === 0 ? 'bg-blue-500' : 'bg-gray-300'}`}></button>
+                <button key={i} className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${i === 0 ? 'bg-blue-500' : 'bg-gray-300'}`}></button>
               ))}
             </div>
           </div>
@@ -287,48 +287,48 @@ export const Portfolio = () => {
 
       <section 
         ref={addSectionRef}
-        className="relative py-20 bg-gradient-to-br from-gray-900 to-blue-900 overflow-hidden"
+        className="relative py-16 md:py-20 bg-gradient-to-br from-gray-900 to-blue-900 overflow-hidden"
       >
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-blue-500/20 blur-3xl" 
+          <div className="absolute top-1/4 left-1/4 w-24 md:w-40 h-24 md:h-40 rounded-full bg-blue-500/20 blur-3xl" 
                style={{ transform: `translate(${scrollY * 0.02}px, ${-scrollY * 0.01}px)` }}></div>
-          <div className="absolute bottom-1/3 right-1/5 w-60 h-60 rounded-full bg-purple-500/20 blur-3xl"
+          <div className="absolute bottom-1/3 right-1/5 w-32 md:w-60 h-32 md:h-60 rounded-full bg-purple-500/20 blur-3xl"
                style={{ transform: `translate(${-scrollY * 0.03}px, ${scrollY * 0.01}px)` }}></div>
         </div>
 
-        <div className="container mx-auto px-6 relative">
-          <div className={`text-center mb-16 transition-all duration-1000 ${getAnimationClass(4)}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
-            <div className="w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
-            <p className="text-blue-100 max-w-2xl mx-auto">Ready to start your next project? Contact us today for a free consultation.</p>
+        <div className="container mx-auto px-4 md:px-6 relative">
+          <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 ${getAnimationClass(4)}`}>
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
+            <div className="w-16 md:w-20 h-1 bg-blue-400 mx-auto mb-6"></div>
+            <p className="text-sm md:text-base text-blue-100 max-w-2xl mx-auto">Ready to start your next project? Contact us today for a free consultation.</p>
           </div>
 
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
             <div className={`transition-all duration-1000 delay-200 ${getAnimationClass(4)}`}>
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-8">
-                <div className="mb-6 rounded-lg overflow-hidden">
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 md:p-8">
+                <div className="mb-4 md:mb-6 rounded-lg overflow-hidden">
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
-                <div className="space-y-6">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Contact Information</h3>
+                <div className="space-y-4 md:space-y-6">
                   <div className="flex items-start">
-                    <span className="text-blue-300 mr-4">📍</span>
+                    <span className="text-blue-300 mr-3 md:mr-4 text-base md:text-lg">📍</span>
                     <div>
-                      <h4 className="font-bold text-white">Address</h4>
-                      <p className="text-blue-100">178 , Ram Nagar Colony , Goner Road , Jaipur</p>
+                      <h4 className="font-bold text-white text-sm md:text-base">Address</h4>
+                      <p className="text-xs md:text-base text-blue-100">178 , Ram Nagar Colony , Goner Road , Jaipur</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-blue-300 mr-4">📞</span>
+                    <span className="text-blue-300 mr-3 md:mr-4 text-base md:text-lg">📞</span>
                     <div>
-                      <h4 className="font-bold text-white">Phone</h4>
-                      <p className="text-blue-100">9672632315</p>
+                      <h4 className="font-bold text-white text-sm md:text-base">Phone</h4>
+                      <p className="text-xs md:text-base text-blue-100">9672632315</p>
                     </div>
                   </div>
                   <div className="flex items-start">
-                    <span className="text-blue-300 mr-4">✉️</span>
+                    <span className="text-blue-300 mr-3 md:mr-4 text-base md:text-lg">✉️</span>
                     <div>
-                      <h4 className="font-bold text-white">Email</h4>
-                      <p className="text-blue-100">s9rtechnology@gmail.com</p>
+                      <h4 className="font-bold text-white text-sm md:text-base">Email</h4>
+                      <p className="text-xs md:text-base text-blue-100">s9rtechnology@gmail.com</p>
                     </div>
                   </div>
                 </div>
@@ -336,21 +336,21 @@ export const Portfolio = () => {
             </div>
 
             <div className={`transition-all duration-1000 delay-400 ${getAnimationClass(4)}`}>
-              <div className="bg-white rounded-xl p-8 shadow-xl">
-                <div className="mb-6 rounded-lg overflow-hidden">
+              <div className="bg-white rounded-xl p-6 md:p-8 shadow-xl">
+                <div className="mb-4 md:mb-6 rounded-lg overflow-hidden">
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Send a Message</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Send a Message</h3>
                 <form>
-                  <div className="mb-4">
-                    <input type="text" placeholder="Your Name" className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:bg-white" />
+                  <div className="mb-3 md:mb-4">
+                    <input type="text" placeholder="Your Name" className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg bg-gray-100 border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:bg-white text-sm md:text-base" />
                   </div>
-                  <div className="mb-4">
-                    <input type="email" placeholder="Your Email" className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:bg-white" />
+                  <div className="mb-3 md:mb-4">
+                    <input type="email" placeholder="Your Email" className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg bg-gray-100 border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:bg-white text-sm md:text-base" />
                   </div>
                   <div className="mb-4">
                     <textarea rows="4" placeholder="Your Message" className="w-full px-4 py-3 rounded-lg bg-gray-100 border-transparent focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:bg-white"></textarea>
                   </div>
-                  <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold py-2 md:py-3 px-4 md:px-6 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
                     Send Message
                   </button>
                 </form>
@@ -360,30 +360,30 @@ export const Portfolio = () => {
         </div>
       </section>
 
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-6">
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
+        <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
                 <img
-                           src={Logo}
-                           alt="Logo"
-                           className="h-[80px] w-[140px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] transition-transform duration-300 hover:scale-110"
-                         />
-                <h2 className="text-2xl font-bold">Portfolio</h2>
+                  src={Logo}
+                  alt="Logo"
+                  className="h-[60px] w-[120px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] transition-transform duration-300 hover:scale-110"
+                />
+                <h2 className="text-xl md:text-2xl font-bold">Portfolio</h2>
               </div>
-              <p className="text-gray-400 mt-2">Crafting digital experiences that inspire.</p>
+              <p className="text-xs md:text-base text-gray-400 mt-2">Crafting digital experiences that inspire.</p>
             </div>
-            <div className="flex space-x-6">
+            <div className="flex space-x-4 md:space-x-6 text-sm md:text-base">
               <div href="#" className="text-gray-400 hover:text-white transition-colors">About</div>
               <div href="#" className="text-gray-400 hover:text-white transition-colors">Services</div>
               <div href="#" className="text-gray-400 hover:text-white transition-colors">Portfolio</div>
               <div href="#" className="text-gray-400 hover:text-white transition-colors">Contact</div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400">© 2024 S9r Technology Pvt. Ltd. All rights reserved.</p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
+          <div className="border-t border-gray-800 mt-6 md:mt-8 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-xs md:text-base text-gray-400">© 2024 S9r Technology Pvt. Ltd. All rights reserved.</p>
+            <div className="flex space-x-3 md:space-x-4 mt-4 md:mt-0">
               <div href="#" className="text-gray-400 hover:text-white transition-colors">
                 <span>📱</span>
               </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Footer () {
+export default function Footer() {
   const [hoverSocial, setHoverSocial] = useState(null);
   const [gradientPosition, setGradientPosition] = useState(0);
   
@@ -122,6 +122,55 @@ export default function Footer () {
           transition: all 0.3s ease;
         }
         
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        
+        @media (min-width: 640px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .footer-grid {
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+          }
+          
+          .company-info {
+            grid-column: span 4 / span 4;
+          }
+          
+          .services-col {
+            grid-column: span 2 / span 2;
+          }
+          
+          .company-col {
+            grid-column: span 2 / span 2;
+          }
+          
+          .connect-col {
+            grid-column: span 4 / span 4;
+          }
+          
+          .bottom-footer {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }
+        
+        .bottom-footer {
+          margin-top: 3rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid rgba(31, 41, 55, 0.5);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+        
         .section-title::before {
           content: '';
           display: inline-block;
@@ -132,9 +181,9 @@ export default function Footer () {
         }
       `}</style>
 
-      <div className="container mx-auto px-4 py-12 relative z-10">
+      <div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
         {/* Tech-themed divider */}
-        <div className="flex items-center justify-center mb-10">
+        <div className="flex items-center justify-center mb-8 md:mb-10">
           <div style={{ height: "1px", background: "linear-gradient(to right, transparent, #22d3ee, transparent)", width: "100%" }}></div>
           <div className="px-4">
             <div className="text-cyan-400 mx-2" style={{ fontSize: "24px" }}>⦿</div>
@@ -143,40 +192,40 @@ export default function Footer () {
         </div>
 
         {/* Main footer content */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(12, minmax(0, 1fr))", gap: "2rem" }}>
+        <div className="footer-grid">
           {/* Company info */}
-          <div style={{ gridColumn: "span 4 / span 4", display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
+          <div className="company-info flex flex-col gap-4">
+            <div className="flex items-center gap-2 mb-4">
               <div style={{ background: "#22d3ee", height: "2rem", width: "0.25rem", borderRadius: "9999px" }}></div>
-              <h3 style={{ color: "white", fontWeight: "bold", fontSize: "1.25rem" }}>S9r Technologies</h3>
+              <h3 className="text-white font-bold text-xl">S9r Technologies</h3>
             </div>
-            <p style={{ color: "#d1d5db" }}>Transforming ideas into digital reality with cutting-edge solutions.</p>
+            <p className="text-gray-300">Transforming ideas into digital reality with cutting-edge solutions.</p>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", transition: "color 0.3s ease" }} className="hover-scale">
-              <div style={{ color: "#22d3ee" }}>📍</div>
+            <div className="flex items-center gap-2 transition-colors duration-300 hover-scale">
+              <div className="text-cyan-400">📍</div>
               <p>Jaipur, 302031, Rajasthan, India</p>
             </div>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", transition: "color 0.3s ease" }} className="hover-scale">
-              <div style={{ color: "#22d3ee" }}>📞</div>
+            <div className="flex items-center gap-2 transition-colors duration-300 hover-scale">
+              <div className="text-cyan-400">📞</div>
               <p>+91 9672632315</p>
             </div>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", transition: "color 0.3s ease" }} className="hover-scale">
-              <div style={{ color: "#22d3ee" }}>✉️</div>
+            <div className="flex items-center gap-2 transition-colors duration-300 hover-scale">
+              <div className="text-cyan-400">✉️</div>
               <p>contact@s9rtechnologies.com</p>
             </div>
           </div>
 
           {/* Services */}
-          <div style={{ gridColumn: "span 2 / span 2" }}>
-            <h3 style={{ color: "white", fontWeight: "bold", fontSize: "1.125rem", marginBottom: "1rem", display: "flex", alignItems: "center" }}>
+          <div className="services-col">
+            <h3 className="text-white font-bold text-lg mb-4 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#a855f7", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
               Services
             </h3>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <ul className="flex flex-col gap-2">
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -186,7 +235,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -196,7 +245,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -206,7 +255,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -219,14 +268,14 @@ export default function Footer () {
           </div>
 
           {/* Company */}
-          <div style={{ gridColumn: "span 2 / span 2" }}>
-            <h3 style={{ color: "white", fontWeight: "bold", fontSize: "1.125rem", marginBottom: "1rem", display: "flex", alignItems: "center" }}>
+          <div className="company-col">
+            <h3 className="text-white font-bold text-lg mb-4 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#3b82f6", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
               Company
             </h3>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <ul className="flex flex-col gap-2">
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -236,7 +285,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -246,7 +295,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -256,7 +305,7 @@ export default function Footer () {
                 </CustomLink>
               </li>
               <li>
-                <CustomLink className="hover-slide" style={{ display: "flex", alignItems: "center", transition: "all 0.3s ease", color: "#9ca3af" }}>
+                <CustomLink className="hover-slide flex items-center transition-all duration-300 text-gray-400">
                   <span style={{ opacity: 0, transition: "opacity 0.3s ease", marginRight: "0.25rem" }}>→</span>
                   <span style={{ color: "#d1d5db", transition: "color 0.3s ease" }} 
                         onMouseOver={(e) => { e.currentTarget.style.color = "#22d3ee"; e.currentTarget.previousSibling.style.opacity = 1; }}
@@ -269,12 +318,12 @@ export default function Footer () {
           </div>
 
           {/* Social and newsletter */}
-          <div style={{ gridColumn: "span 4 / span 4" }}>
-            <h3 style={{ color: "white", fontWeight: "bold", fontSize: "1.125rem", marginBottom: "1rem", display: "flex", alignItems: "center" }}>
+          <div className="connect-col">
+            <h3 className="text-white font-bold text-lg mb-4 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#22d3ee", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
               Connect With Us
             </h3>
-            <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem" }}>
+            <div className="flex gap-3 mb-6">
               {socialLinks.map((social, index) => (
                 <CustomLink 
                   key={index}
@@ -300,91 +349,64 @@ export default function Footer () {
               ))}
             </div>
             
-            <h3 style={{ color: "white", fontWeight: "bold", fontSize: "1.125rem", marginBottom: "0.75rem", display: "flex", alignItems: "center" }}>
+            <h3 className="text-white font-bold text-lg mb-3 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#ec4899", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
               Stay Updated
             </h3>
-            <div style={{ position: "relative" }}>
+            <div className="relative">
               <input 
                 type="email" 
                 placeholder="Your email" 
-                style={{ 
-                  backgroundColor: "rgba(31, 41, 55, 0.8)",
-                  padding: "0.75rem",
-                  borderRadius: "0.5rem",
-                  outline: "none",
-                  color: "white",
-                  width: "100%",
-                  border: "1px solid #374151",
-                  paddingRight: "6rem",
+                className="w-full p-3 rounded-lg bg-gray-800 bg-opacity-80 outline-none text-white border border-gray-700 pr-24 transition-all duration-300"
+                style={{
                   transition: "all 0.3s ease"
                 }}
                 onFocus={(e) => e.target.style.borderColor = "#22d3ee"}
                 onBlur={(e) => e.target.style.borderColor = "#374151"}
               />
-              <button style={{ 
-                position: "absolute",
-                right: "0.25rem",
-                top: "0.25rem",
-                background: "linear-gradient(to right, #22d3ee, #3b82f6)",
-                color: "white",
-                padding: "0.5rem 1rem",
-                borderRadius: "0.375rem",
-                fontWeight: "500",
-                fontSize: "0.875rem",
-                transition: "all 0.3s ease"
-              }}
-              onMouseOver={(e) => {
-                e.target.style.background = "linear-gradient(to right, #06b6d4, #2563eb)";
-                e.target.style.transform = "scale(1.03)";
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = "linear-gradient(to right, #22d3ee, #3b82f6)";
-                e.target.style.transform = "scale(1)";
-              }}>
+              <button className="absolute right-1 top-1 py-2 px-3 md:px-4 rounded-md font-medium text-sm text-white transition-all duration-300"
+                style={{
+                  background: "linear-gradient(to right, #22d3ee, #3b82f6)"
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.background = "linear-gradient(to right, #06b6d4, #2563eb)";
+                  e.target.style.transform = "scale(1.03)";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.background = "linear-gradient(to right, #22d3ee, #3b82f6)";
+                  e.target.style.transform = "scale(1)";
+                }}>
                 Subscribe
               </button>
             </div>
-            <p style={{ marginTop: "0.5rem", fontSize: "0.75rem", color: "#9ca3af" }}>Join our newsletter for tech insights & updates</p>
+            <p className="mt-2 text-xs text-gray-400">Join our newsletter for tech insights & updates</p>
           </div>
         </div>
 
         {/* Bottom footer */}
-        <div style={{ 
-          marginTop: "3rem", 
-          paddingTop: "1.5rem", 
-          borderTop: "1px solid rgba(31, 41, 55, 0.5)", 
-          display: "flex", 
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "1rem",
-          '@media (min-width: 768px)': {
-            flexDirection: "row",
-            justifyContent: "space-between"
-          }
-        }}>
-          <p style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ color: "#22d3ee", marginRight: "0.25rem" }}>&copy;</span> 2025 S9r Technologies. All rights reserved.
+        <div className="bottom-footer">
+          <p className="flex items-center text-center">
+            <span className="text-cyan-400 mr-1">&copy;</span> 2025 S9r Technologies. All rights reserved.
           </p>
           
-          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", marginTop: "1rem" }}>
-            <CustomLink style={{ color: "#9ca3af", transition: "color 0.3s ease" }}
+          <div className="flex flex-wrap justify-center items-center gap-4 mt-4 md:mt-0">
+            <CustomLink className="text-gray-400 transition-colors duration-300 hover:text-white"
               onMouseOver={(e) => e.target.style.color = "white"}
               onMouseOut={(e) => e.target.style.color = "#9ca3af"}>
               Privacy
             </CustomLink>
-            <CustomLink style={{ color: "#9ca3af", transition: "color 0.3s ease" }}
+            <CustomLink className="text-gray-400 transition-colors duration-300 hover:text-white"
               onMouseOver={(e) => e.target.style.color = "white"}
               onMouseOut={(e) => e.target.style.color = "#9ca3af"}>
               Terms
             </CustomLink>
-            <CustomLink style={{ color: "#9ca3af", transition: "color 0.3s ease" }}
+            <CustomLink className="text-gray-400 transition-colors duration-300 hover:text-white"
               onMouseOver={(e) => e.target.style.color = "white"}
               onMouseOut={(e) => e.target.style.color = "#9ca3af"}>
               Sitemap
             </CustomLink>
             
-            <div style={{ display: "flex", alignItems: "center", color: "#9ca3af" }}
+            <div className="flex items-center text-gray-400"
                  onMouseOver={(e) => {
                    e.currentTarget.style.color = "#22d3ee";
                    e.currentTarget.firstChild.style.animation = "pulse 1s infinite";
@@ -393,18 +415,13 @@ export default function Footer () {
                    e.currentTarget.style.color = "#9ca3af";
                    e.currentTarget.firstChild.style.animation = "none";
                  }}>
-              <span style={{ color: "#22d3ee", marginRight: "0.5rem" }}>☕</span>
-              <span style={{ transition: "color 0.3s ease" }}>Made with ❤️ in India</span>
+              <span className="text-cyan-400 mr-2">☕</span>
+              <span className="transition-colors duration-300">Made with ❤️ in India</span>
             </div>
             
             <CustomLink
               onClick={scrollToTop}
-              style={{ 
-                color: "#22d3ee", 
-                transition: "all 0.3s ease",
-                fontSize: "1.25rem"
-              }}
-              className="hover-scale"
+              className="text-cyan-400 transition-all duration-300 hover-scale text-xl"
               aria-label="Scroll to top"
             >
               ↑
