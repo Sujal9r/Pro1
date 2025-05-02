@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from '../Navbar';
-import { Footer } from '../Footer';
+import  Footer  from '../Footer/Footer';
 import { Pro1 } from "../Pro1";
 
 const Developer = () => {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { SlLogout } from "react-icons/sl";
 import { FaUserTie } from "react-icons/fa";
+import { BiLogIn } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import Logo from "./assets/S9r_technology.png";
+import Logo from "./assets/Logo/S9r_technology.png";
 
 export const Header = ({ Redirect }) => {
   const [formData, setFormData] = useState({
@@ -13,22 +14,23 @@ export const Header = ({ Redirect }) => {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoverItem, setHoverItem] = useState(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
   const hoverTimeoutRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check both localStorage and sessionStorage for current user
     const currentUser = JSON.parse(localStorage.getItem("currentUser")) || 
       JSON.parse(sessionStorage.getItem("currentUser"));
     
     if (currentUser) {
-      setFormData({ username: currentUser.username });
+      setFormData({ username: currentUser.username || "User" });
       setIsLoggedIn(true);
+      setShowLoginPopup(false); // Hide popup when logged in
     } else {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      if (users.length > 0) {
-        setFormData({ username: users[users.length - 1].username });
-      }
+      setFormData({ username: "Guest" });
       setIsLoggedIn(false);
+      setShowLoginPopup(true); // Show popup when not logged in
     }
 
     const handleScroll = () => {
@@ -54,6 +56,7 @@ export const Header = ({ Redirect }) => {
     
     setIsLoggedIn(false);
     setFormData({ username: "Guest" });
+    setShowLoginPopup(true); // Show popup after logout
     
     navigate("/login");
   };
@@ -136,13 +139,13 @@ export const Header = ({ Redirect }) => {
 
         <div className="sm:hidden mx-auto">
           <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-white' : 'text-sky-200'} transition-colors duration-300`}>
-            Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
           </h1>
         </div>
 
         <div className="hidden sm:block ml-4">
           <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-sky-200' : 'text-white'} transition-colors duration-300`}>
-            Welcome , <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
           </h1>
         </div>
 
@@ -300,7 +303,7 @@ export const Header = ({ Redirect }) => {
                     }}
                     className="flex items-center justify-center gap-2 px-4 py-3 bg-white bg-opacity-10 text-white rounded-lg hover:bg-opacity-20 transition-all"
                   >
-                    <SlLogout className="text-xl" />
+                    <BiLogIn className="text-xl" />
                     <span>Login</span>
                   </button>
                 </>
@@ -365,17 +368,29 @@ export const Header = ({ Redirect }) => {
                 <FaUserTie className="text-lg lg:text-xl" />
                 <span>Sign up</span>
               </button>
-              <button
-                onClick={handleLoginRedirect}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
-                  scrollPosition < 20 
-                    ? 'bg-white shadow-md text-purple-800 hover:shadow-lg' 
-                    : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
-                }`}
-              >
-                <SlLogout className="text-lg lg:text-xl" />
-                <span>Login</span>
-              </button>
+              
+              {/* Login button with popup */}
+              <div className="relative group">
+                <button
+                  onClick={handleLoginRedirect}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm lg:text-base ${
+                    scrollPosition < 20 
+                      ? 'bg-white shadow-md text-purple-800 hover:shadow-lg animate-pulse group-hover:animate-none' 
+                      : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
+                  }`}
+                >
+                  <SlLogout className="text-lg lg:text-xl" />
+                  <span>Login</span>
+                </button>
+                
+                {/* Popup that appears continuously when not logged in */}
+                {!isLoggedIn && showLoginPopup && (
+                  <div className="absolute top-full mt-2 right-0 w-48 bg-white text-purple-800 rounded-md shadow-lg p-3 text-sm animate-bounce z-50">
+                    <div className="absolute -top-2 right-6 w-4 h-4 bg-white transform rotate-45"></div>
+                    <p className="font-medium">Sign in to access your account!</p>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>
