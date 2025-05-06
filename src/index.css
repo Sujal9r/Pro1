@@ -170,15 +170,16 @@
   }
 }
 
-/* Pro1.css */
-.animation-container {
+/* TechPro Advanced CSS - Modern Tech Company Styling */
+
+.tech-hero-container {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(-45deg, #7f00ff,purple, black, #4a00e0);
+  background: linear-gradient(-45deg, #0a0047, #3a0088, #000000, #2d00b3);
   background-size: 400% 400%;
-  animation: gradientShift 8s ease infinite;
+  animation: techGradientFlow 15s ease infinite;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,106 +188,353 @@
   padding: 2rem;
 }
 
-@keyframes gradientShift {
+@keyframes techGradientFlow {
   0% {background-position: 0% 50%;}
+  25% {background-position: 50% 100%;}
   50% {background-position: 100% 50%;}
+  75% {background-position: 50% 0%;}
   100% {background-position: 0% 50%;}
 }
 
-.blob {
+/* Tech-inspired geometric elements */
+.tech-particle {
   position: absolute;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent);
-  border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
-  animation: morph 6s ease-in-out infinite alternate, float 5s ease-in-out infinite alternate;
-  mix-blend-mode: lighten;
-  opacity: 0.7;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  animation: particleFloat 20s linear infinite;
+  box-shadow: 0 0 10px rgba(148, 0, 255, 0.6);
 }
 
-.blob1 {
-  top: 5%;
-  left: 25%;
-  background: radial-gradient(circle at 30% 30%, rgba(238, 130, 238, 0.8), transparent);
+.particle1 {
+  width: 40px;
+  height: 40px;
+  top: 15%;
+  left: 10%;
+  animation-duration: 25s;
+  transform: rotate(45deg);
+}
+
+.particle2 {
+  width: 25px;
+  height: 25px;
+  top: 75%;
+  left: 15%;
+  animation-duration: 35s;
+  animation-delay: 2s;
+  transform: rotate(30deg);
+}
+
+.particle3 {
+  width: 35px;
+  height: 35px;
+  top: 25%;
+  right: 15%;
+  animation-duration: 28s;
+  animation-delay: 4s;
+  transform: rotate(60deg);
+}
+
+.particle4 {
+  width: 20px;
+  height: 20px;
+  bottom: 20%;
+  right: 10%;
+  animation-duration: 22s;
+  animation-delay: 3s;
+  transform: rotate(15deg);
+}
+
+/* Digital circuit lines */
+.circuit-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(100, 0, 255, 0.6), transparent);
+  height: 1px;
+  width: 100%;
+  opacity: 0;
+  animation: circuitPulse 8s infinite;
+}
+
+.line1 {
+  top: 20%;
   animation-delay: 0s;
 }
 
-.blob2 {
-  top: 65%;
-  left: 10%;
-  background: radial-gradient(circle at 70% 70%, rgba(147, 112, 219, 0.8), transparent);
+.line2 {
+  top: 40%;
   animation-delay: 2s;
 }
 
-.blob3 {
-  top: 25%;
-  left: 70%;
-  background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.8), transparent);
+.line3 {
+  top: 60%;
   animation-delay: 4s;
 }
 
-@keyframes morph {
+.line4 {
+  top: 80%;
+  animation-delay: 6s;
+}
+
+@keyframes circuitPulse {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  20% {
+    opacity: 0.8;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Futuristic blobs with tech-inspired gradients */
+.tech-blob {
+  position: absolute;
+  background: radial-gradient(circle at 30% 30%, rgba(145, 70, 255, 0.4), transparent);
+  border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
+  animation: blobMorph 8s ease-in-out infinite alternate, blobFloat 10s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  filter: blur(8px);
+}
+
+.tech-blob1 {
+  width: 300px;
+  height: 300px;
+  top: 15%;
+  left: 25%;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 0, 255, 0.6), rgba(0, 50, 200, 0.3));
+  animation-delay: 0s;
+}
+
+.tech-blob2 {
+  width: 250px;
+  height: 250px;
+  top: 65%;
+  left: 15%;
+  background: radial-gradient(circle at 70% 70%, rgba(60, 0, 220, 0.5), rgba(200, 0, 255, 0.2));
+  animation-delay: 3s;
+}
+
+.tech-blob3 {
+  width: 280px;
+  height: 280px;
+  top: 30%;
+  right: 20%;
+  background: radial-gradient(circle at 50% 50%, rgba(80, 0, 180, 0.5), rgba(0, 100, 255, 0.2));
+  animation-delay: 5s;
+}
+
+@keyframes blobMorph {
   0% {
     border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
+  }
+  25% {
+    border-radius: 50% 50% 40% 60% / 40% 60% 40% 60%;
   }
   50% {
     border-radius: 60% 40% 30% 70% / 70% 60% 40% 30%;
   }
+  75% {
+    border-radius: 40% 60% 50% 50% / 60% 40% 60% 40%;
+  }
   100% {
-    border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
+    border-radius: 30% 70% 40% 60% / 50% 30% 70% 50%;
   }
 }
 
-@keyframes float {
+@keyframes blobFloat {
   0% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-20px) rotate(120deg) scale(1.05);
+  }
+  66% {
+    transform: translateY(10px) rotate(240deg) scale(0.95);
   }
   100% {
-    transform: translateY(-40px) rotate(360deg);
+    transform: translateY(-30px) rotate(360deg) scale(1.02);
   }
 }
 
-.text-content {
+@keyframes particleFloat {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, 50px) rotate(90deg);
+  }
+  50% {
+    transform: translate(200px, 0px) rotate(180deg);
+  }
+  75% {
+    transform: translate(100px, -50px) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+/* Glowing company content */
+.company-content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   color: #ffffff;
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-  animation: pulse 2s infinite alternate;
+  text-shadow: 0 0 15px rgba(100, 0, 255, 0.8);
 }
 
-.text-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+.company-content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #ffffff, #d9b3ff, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGlow 3s ease-in-out infinite alternate;
 }
 
-.text-content p {
-  font-size: 1.5rem;
+.company-content h2 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  opacity: 0.9;
 }
 
-@keyframes pulse {
+.company-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@keyframes textGlow {
   0% {
+    text-shadow: 0 0 5px rgba(100, 0, 255, 0.8);
     transform: scale(1);
-    opacity: 0.9;
   }
   100% {
-    transform: scale(1.05);
-    opacity: 1;
+    text-shadow: 0 0 20px rgba(100, 0, 255, 0.8), 0 0 30px rgba(100, 0, 255, 0.6);
+    transform: scale(1.03);
   }
 }
 
-/* Responsive Design */
+/* Tech button styling */
+.tech-button {
+  position: relative;
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  color: white;
+  background: linear-gradient(45deg, #3a0088, #6600cc);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(102, 0, 204, 0.4);
+}
+
+.tech-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: buttonShine 3s infinite;
+}
+
+.tech-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 0, 204, 0.6);
+}
+
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* Data grid background for tech feel */
+.data-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(100, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+  .tech-blob {
+    transform: scale(0.8);
+  }
+  
+  .company-content h1 {
+    font-size: 3.5rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .blob {
-    width: 140px;
-    height: 140px;
+  .tech-blob {
+    transform: scale(0.6);
   }
-
-  .text-content h1 {
-    font-size: 2.2rem;
+  
+  .tech-particle {
+    transform: scale(0.7);
   }
-
-  .text-content p {
+  
+  .company-content h1 {
+    font-size: 2.8rem;
+  }
+  
+  .company-content h2 {
+    font-size: 1.4rem;
+  }
+  
+  .company-content p {
     font-size: 1rem;
   }
 }
 
+@media (max-width: 480px) {
+  .tech-blob {
+    transform: scale(0.4);
+  }
+  
+  .company-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .company-content h2 {
+    font-size: 1.2rem;
+  }
+  
+  .circuit-line {
+    display: none;
+  }
+}

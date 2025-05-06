@@ -2,14 +2,36 @@ import React from 'react';
 
 export const Pro1 = () => {
   return (
-    <div className="animation-container">
-      <div className="blob blob1"></div>
-      <div className="blob blob2"></div>
-      <div className="blob blob3"></div>
-      <div className="text-content">
-        <h1>Intoducing S9r Technologies</h1>
-        <p>Experience a lively, futuristic Technology ✨</p>
+    <div className="tech-hero-container">
+      {/* Tech blobs */}
+      <div className="tech-blob tech-blob1"></div>
+      <div className="tech-blob tech-blob2"></div>
+      <div className="tech-blob tech-blob3"></div>
+      
+      {/* Geometric particles */}
+      <div className="tech-particle particle1"></div>
+      <div className="tech-particle particle2"></div>
+      <div className="tech-particle particle3"></div>
+      <div className="tech-particle particle4"></div>
+      
+      {/* Circuit lines */}
+      <div className="circuit-line line1"></div>
+      <div className="circuit-line line2"></div>
+      <div className="circuit-line line3"></div>
+      <div className="circuit-line line4"></div>
+      
+      {/* Data grid background */}
+      <div className="data-grid"></div>
+      
+      {/* Company content */}
+      <div className="company-content">
+        <h1>Introducing S9r Technologies</h1>
+        <h2>Next-Gen Innovation Solutions</h2>
+        <p>Experience revolutionary, futuristic technology solutions that transform how businesses operate in the digital landscape.</p>
+        <button className="tech-button">Discover More</button>
       </div>
     </div>
   );
 };
+
+export default Pro1;
