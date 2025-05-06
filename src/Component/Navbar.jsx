@@ -20,17 +20,17 @@ export const Header = ({ Redirect }) => {
 
   useEffect(() => {
     // Check both localStorage and sessionStorage for current user
-    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || 
-      JSON.parse(sessionStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(localStorage.getItem("User")) || 
+      JSON.parse(sessionStorage.getItem("User"));
     
     if (currentUser) {
       setFormData({ username: currentUser.username || "User" });
       setIsLoggedIn(true);
-      setShowLoginPopup(false); // Hide popup when logged in
+      setShowLoginPopup(false); // login hote hi popup false
     } else {
       setFormData({ username: "Guest" });
       setIsLoggedIn(false);
-      setShowLoginPopup(true); // Show popup when not logged in
+      setShowLoginPopup(true); // login rhega jab popup true
     }
 
     const handleScroll = () => {
@@ -68,7 +68,7 @@ export const Header = ({ Redirect }) => {
     
     const startColor = "#6a11cb";
     const midColor = "#2575fc";
-    const endColor = "#34eb83";
+    const endColor = "#560591";
     const stop1 = Math.min(scrollPercentage, 30);
     const stop2 = Math.min(scrollPercentage, 70);
     return `linear-gradient(to right, ${startColor} ${stop1}%, ${midColor} ${stop2}%, ${endColor} 100%)`;
@@ -136,7 +136,13 @@ export const Header = ({ Redirect }) => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
         </div> 
-
+        {/* Ye Mobile k Lie  */}
+        <div className="sm:hidden mx-auto">
+          <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-white' : 'text-sky-200'} transition-colors duration-300`}>
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+          </h1>
+        </div>
+        {/* Ye Laptop k Lie */}
         <div className="hidden sm:block ml-4">
           <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-sky-200' : 'text-white'} transition-colors duration-300`}>
             Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
@@ -379,7 +385,7 @@ export const Header = ({ Redirect }) => {
                 
                 {/* Popup that appears continuously when not logged in */}
                 {!isLoggedIn && showLoginPopup && (
-                  <div className="absolute top-full mt-2 right-0 w-48 bg-white text-purple-800 rounded-md shadow-lg p-3 text-sm animate-bounce z-50">
+                  <div className="absolute top-full mt-4 right-0 w-48 bg-white text-purple-800 rounded-md shadow-lg p-3 text-sm animate-bounce z-50">
                     <div className="absolute -top-2 right-6 w-4 h-4 bg-white transform rotate-45"></div>
                     <p className="font-medium">Sign in to access your account!</p>
                   </div>

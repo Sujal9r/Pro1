@@ -6,6 +6,7 @@ import SignUp from './Component/Login/Signup';
 import Hire from './Component/Hiring/Hire';
 import { Career } from './Component/Navbar/Career';
 import { Portfolio } from './Component/Navbar/Portfolio';
+import  Discover  from './Component/Description/Discover';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/hiring' element={<Hire/>}/>
         <Route path='/career' element={<Career/>}/>
         <Route path='/portfolio' element={<Portfolio/>}/>
+        <Route path='/discover' element={<Discover/>}/>
       </Routes>
     </Router>
   );
