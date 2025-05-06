@@ -135,17 +135,11 @@ export const Header = ({ Redirect }) => {
             className="h-[80px] w-[140px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] transition-transform duration-300 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
-        </div>
-
-        <div className="sm:hidden mx-auto">
-          <h1 className={`font-bold text-base ${scrollPosition < 20 ? 'text-white' : 'text-sky-200'} transition-colors duration-300`}>
-            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
-          </h1>
-        </div>
+        </div> 
 
         <div className="hidden sm:block ml-4">
           <h1 className={`font-bold text-base sm:text-lg lg:text-xl ${scrollPosition < 20 ? 'text-sky-200' : 'text-white'} transition-colors duration-300`}>
-            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span>!
+            Welcome, <span className="text-yellow-300 animate-pulse">{formData.username}</span> !
           </h1>
         </div>
 
@@ -211,7 +205,7 @@ export const Header = ({ Redirect }) => {
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex flex-col gap-4 p-6 h-full">
+          <div className="flex flex-col gap-4 p-6 h-[95%]">
             <div className="flex justify-between items-center mb-8">
               <img src={Logo} alt="Logo" className="h-[60px] w-[120px] rounded-md" />
               <button
