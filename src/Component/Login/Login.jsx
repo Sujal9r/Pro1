@@ -3,12 +3,19 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isGoogleScriptLoaded, setIsGoogleScriptLoaded] = useState(false);
+
+const navigate = useNavigate();
+
+const handleDiscoverRedirect = () => {
+  navigate("/Discover");
+};
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -316,7 +323,9 @@ const Login = () => {
               <p className="mt-4 text-sm">
                 Empowering Innovation, Transforming Technology
               </p>
-              <button className="mt-4 bg-white text-purple-900 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors">
+              <button onClick={() => {
+            handleDiscoverRedirect();
+          }} className="mt-4 bg-white text-purple-900 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors">
                 Learn more
               </button>
               <div className="mt-8 text-gray-300">

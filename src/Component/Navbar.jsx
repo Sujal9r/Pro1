@@ -20,8 +20,8 @@ export const Header = ({ Redirect }) => {
 
   useEffect(() => {
     // Check both localStorage and sessionStorage for current user
-    const currentUser = JSON.parse(localStorage.getItem("User")) || 
-      JSON.parse(sessionStorage.getItem("User"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")) || 
+      JSON.parse(sessionStorage.getItem("currentUser"));
     
     if (currentUser) {
       setFormData({ username: currentUser.username || "User" });
@@ -172,7 +172,15 @@ export const Header = ({ Redirect }) => {
 
               {item.dropdown && hoverItem === item.label && (
                 <div 
-                  className="absolute top-auto transform translate-y-2 left-0 bg-white bg-opacity-95 backdrop-blur-sm text-gray-800 rounded-lg shadow-lg p-6 w-[300px] sm:w-[400px] z-50"
+                  className="absolute top-auto transform translate-y-2 bg-white bg-opacity-95 backdrop-blur-sm text-gray-800 rounded-lg shadow-lg p-6 w-[300px] sm:w-[400px] z-50"
+                  style={{
+                    left: item.label === "Industries" ? 
+                      "50%" : 
+                      "0", 
+                    transform: item.label === "Industries" ? 
+                      "translateX(-50%) translateY(8px)" : 
+                      "translateY(8px)" 
+                  }}
                   onMouseEnter={() => handleMouseEnter(item.label)}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -379,7 +387,7 @@ export const Header = ({ Redirect }) => {
                       : 'bg-transparent border border-white text-white hover:bg-white hover:text-purple-800'
                   }`}
                 >
-                  <SlLogout className="text-lg lg:text-xl" />
+                  <BiLogIn className="text-lg lg:text-xl" />
                   <span>Login</span>
                 </button>
                 

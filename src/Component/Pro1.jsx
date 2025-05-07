@@ -1,9 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 export const Pro1 = () => {
 const navigate = useNavigate();
 const handleDiscoverRedirect = () => {

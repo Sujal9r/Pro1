@@ -2,11 +2,15 @@ import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
+  const handleDiscoverRedirect = () => {
+    navigate("/Discover");
+  };
 
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
@@ -16,9 +20,6 @@ const SignUp = () => {
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password")], "Passwords do not match")
-      .required("Please confirm your password"),
     termsAccepted: Yup.boolean()
       .oneOf([true], "You must accept the Terms and Privacy Policy")
       .required("You must accept the Terms and Privacy Policy"),
@@ -91,7 +92,7 @@ const SignUp = () => {
                   value={formik.values.username}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={`mt-2 w-full px-4 py-2 border ${
+                  className={`mt-2 w-full px-4 py-3 border ${
                     formik.touched.username && formik.errors.username
                       ? "border-red-500"
                       : "border-sky-500"
@@ -112,7 +113,7 @@ const SignUp = () => {
                   value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={`mt-2 w-full px-4 py-2 border ${
+                  className={`mt-2 w-full px-4 py-3 border ${
                     formik.touched.email && formik.errors.email
                       ? "border-red-500"
                       : "border-sky-500"
@@ -134,7 +135,7 @@ const SignUp = () => {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`mt-2 w-full px-4 py-2 border ${
+                    className={`mt-2 w-full px-4 py-3 border ${
                       formik.touched.password && formik.errors.password
                         ? "border-red-500"
                         : "border-sky-500"
@@ -149,37 +150,6 @@ const SignUp = () => {
                 </div>
                 {formik.touched.password && formik.errors.password && (
                   <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
-                )}
-              </label>
-
-              <label className="block mt-4 text-gray-700 text-sm font-medium">
-                Confirm Password
-                <div className="relative">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="••••••••"
-                    value={formik.values.confirmPassword}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    className={`mt-2 w-full px-4 py-2 border ${
-                      formik.touched.confirmPassword && formik.errors.confirmPassword
-                        ? "border-red-500"
-                        : "border-sky-500"
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500`}
-                  />
-                  <div
-                    className="text-xl absolute right-3 top-4 cursor-pointer text-sky-800"
-                    onClick={() => setShowConfirmPassword((prev) => !prev)}
-                  >
-                    {showConfirmPassword ? <BsEye /> : <BsEyeSlash />}
-                  </div>
-                </div>
-                {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                  <div className="text-red-500 text-sm mt-1">
-                    {formik.errors.confirmPassword}
-                  </div>
                 )}
               </label>
 
@@ -222,7 +192,9 @@ const SignUp = () => {
               <p className="mt-4 text-sm">
                 Join our community of innovators and tech enthusiasts
               </p>
-              <button className="mt-4 bg-white text-sky-900 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors">
+              <button onClick={() => {
+            handleDiscoverRedirect();
+          }}   className="mt-4 bg-white text-sky-900 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors">
                 Learn more
               </button>
               <div className="mt-8 text-gray-300">

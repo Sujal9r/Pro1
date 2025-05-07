@@ -538,3 +538,31 @@
     display: none;
   }
 }
+
+/* Custom Scroolbar Whole Project */
+
+* {
+  scrollbar-width: thin;               
+  scrollbar-color:  purple #3a0088;    
+}
+
+
+::-webkit-scrollbar {
+  width: 8px; 
+  height: 8px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; 
+  border-radius: 10px;
+  border: 2px solid #f0f0f0; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4b0082; 
+}

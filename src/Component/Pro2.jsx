@@ -47,7 +47,7 @@ export const Pro2 = () => {
   ];
 
   return (
-    <div className="bg-sky-400 py-12">
+    <div  className="bg-sky-400 py-12">
       <h2 className="text-center text-3xl font-bold mb-4">
         Why <span className="text-purple-600">Choose Us</span>
       </h2>
@@ -60,7 +60,7 @@ export const Pro2 = () => {
             key={index}
             className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 p-6 w-[300px] text-center group"
           >
-            <div className="text-4xl bg-blue-100 w-16 h-16 mx-auto flex items-center justify-center rounded-full mb-4 group-hover:bg-purple-200 transition-colors duration-300">
+            <div className="text-4xl bg-blue-100 w-16 h-16 mx-auto flex items-center justify-center rounded-full mb-4 group-hover:bg-indigo-800 transition-colors duration-300">
               {item.icon}
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-purple-900">

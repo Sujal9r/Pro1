@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from '../Navbar';
 import  Footer  from '../Footer/Footer';
-import { Pro1 } from "../Pro1";
 
 const Developer = () => {
   const [users, setUsers] = useState([]);
@@ -21,11 +20,10 @@ const Developer = () => {
   );
 
   return (
-    <div className="w-full bg-gradient-to-r from-purple-400 via-purple-500 to-red-500 flex flex-col items-center min-h-screen">
+    <div className="w-full bg-gradient-to-r from-purple-400 via-purple-500 to-red-500 flex flex-col items-center">
       <div className="w-full">
-        <Pro1/>
         <Header />
-        <div className="flex justify-center p-5">
+        <div className="flex justify-center p-5 mt-[100px]">
           <input 
             type="text"
             placeholder="Search users..."
