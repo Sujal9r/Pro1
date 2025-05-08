@@ -10,11 +10,13 @@ import  Discover  from './Component/Features/Discover';
 import Support from './Component/Features/Support';
 import ScrollToTop from "./Component/Set/ScroolToTop.jsx";
 import  Contactus  from './Component/Features/Contactus';
+import SideBar from './Component/Features/SideBar.jsx';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <SideBar/>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path='/signup' element={<SignUp/>}/>
