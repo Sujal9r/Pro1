@@ -8,11 +8,13 @@ import { Career } from './Component/Navbar/Career';
 import { Portfolio } from './Component/Navbar/Portfolio';
 import  Discover  from './Component/Features/Discover';
 import Support from './Component/Features/Support';
+import ScrollToTop from "./Component/Set/ScroolToTop.jsx";
 import  Contactus  from './Component/Features/Contactus';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path='/signup' element={<SignUp/>}/>
