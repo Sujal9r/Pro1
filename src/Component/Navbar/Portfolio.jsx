@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Header } from "../Navbar";
-import Logo from "../assets/Logo/S9r_technology.png";
+import { Navbar } from "../Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 export const Portfolio = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -56,7 +56,7 @@ export const Portfolio = () => {
           scrollY > 100 ? "bg-white shadow-lg" : "bg-transparent"
         }`}
       >
-        <Header />
+        <Navbar />
       </div>
 
       <section className="relative h-screen overflow-hidden">
@@ -582,83 +582,7 @@ export const Portfolio = () => {
           </div>
         </div>
       </section>
-
-      <footer className="bg-gray-900 text-white py-8 md:py-12">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <div className="flex items-center">
-                <img
-                  src={Logo}
-                  alt="Logo"
-                  className="h-[60px] w-[120px] sm:h-[80px] sm:w-[140px] lg:h-[100px] lg:w-[180px] transition-transform duration-300 hover:scale-110"
-                />
-                <h2 className="text-xl md:text-2xl font-bold">Portfolio</h2>
-              </div>
-              <p className="text-xs md:text-base text-gray-400 mt-2">
-                Crafting digital experiences that inspire.
-              </p>
-            </div>
-            <div className="flex space-x-4 md:space-x-6 text-sm md:text-base">
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                About
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Services
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Portfolio
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Contact
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-6 md:mt-8 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-xs md:text-base text-gray-400">
-              © 2024 S9r Technology Pvt. Ltd. All rights reserved.
-            </p>
-            <div className="flex space-x-3 md:space-x-4 mt-4 md:mt-0">
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <span>📱</span>
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <span>🐦</span>
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <span>📷</span>
-              </div>
-              <div
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <span>💼</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+    <Footer/>
     </div>
   );
 };

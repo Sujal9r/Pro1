@@ -4,7 +4,6 @@ export default function Footer() {
   const [hoverSocial, setHoverSocial] = useState(null);
   const [gradientPosition, setGradientPosition] = useState(0);
   
-  // Gradient animation effect
   useEffect(() => {
     const gradientInterval = setInterval(() => {
       setGradientPosition(prev => (prev + 1) % 100);
@@ -13,7 +12,6 @@ export default function Footer() {
     return () => clearInterval(gradientInterval);
   }, []);
   
-  // Dynamic gradient style
   const gradientStyle = {
     backgroundImage: `linear-gradient(135deg, 
       hsl(220, 60%, 10%) 0%, 
@@ -33,12 +31,10 @@ export default function Footer() {
     { name: "Instagram", icon: "📸", color: "#f472b6", hoverBg: "#831843" },
   ];
 
-  // Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Custom Link component to avoid using <a> tags
   const CustomLink = ({ children, onClick, className }) => (
     <div 
       onClick={onClick} 
@@ -57,7 +53,6 @@ export default function Footer() {
       className="text-gray-300 text-sm relative overflow-hidden"
       style={gradientStyle}
     >
-      {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         <div 
           className="absolute rounded-full blur-3xl" 
@@ -94,7 +89,6 @@ export default function Footer() {
         ></div>
       </div>
 
-      {/* CSS Animations */}
       <style jsx>{`
         @keyframes float {
           0% { transform: translateY(0) translateX(0); }
@@ -182,7 +176,6 @@ export default function Footer() {
       `}</style>
 
       <div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
-        {/* Tech-themed divider */}
         <div className="flex items-center justify-center mb-8 md:mb-10">
           <div style={{ height: "1px", background: "linear-gradient(to right, transparent, #22d3ee, transparent)", width: "100%" }}></div>
           <div className="px-4">
@@ -191,9 +184,7 @@ export default function Footer() {
           <div style={{ height: "1px", background: "linear-gradient(to right, transparent, #22d3ee, transparent)", width: "100%" }}></div>
         </div>
 
-        {/* Main footer content */}
         <div className="footer-grid">
-          {/* Company info */}
           <div className="company-info flex flex-col gap-4">
             <div className="flex items-center gap-2 mb-4">
               <div style={{ background: "#22d3ee", height: "2rem", width: "0.25rem", borderRadius: "9999px" }}></div>
@@ -217,7 +208,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services */}
           <div className="services-col">
             <h3 className="text-white font-bold text-lg mb-4 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#a855f7", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
@@ -267,7 +257,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div className="company-col">
             <h3 className="text-white font-bold text-lg mb-4 flex items-center">
               <div style={{ height: "0.25rem", width: "1rem", background: "#3b82f6", marginRight: "0.5rem", borderRadius: "9999px" }}></div>
@@ -383,7 +372,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom footer */}
         <div className="bottom-footer">
           <p className="flex items-center text-center">
             <span className="text-cyan-400 mr-1">&copy;</span> 2025 S9r Technologies. All rights reserved.

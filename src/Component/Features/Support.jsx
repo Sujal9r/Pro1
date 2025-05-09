@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Header } from '../Navbar';
 import Footer from '../Footer/Footer';
+import { Navbar } from '../Navbar/Navbar';
 
 const Support = () => {
   const [name, setName] = useState('');
@@ -20,7 +20,7 @@ const Support = () => {
 
   return (
     <div className=" bg-gradient-to-b from-purple-800 via-indigo-700 to-sky-500 w-full">
-        <Header/>
+        <Navbar/>
       <div className="container mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <div className="text-center mb-10 md:mb-16 mt-20">

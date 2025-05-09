@@ -141,7 +141,6 @@ const handleDiscoverRedirect = () => {
 
         const { email, name, picture } = JSON.parse(jsonPayload);
 
-        // Create a userInfo object specifically for Google sign-in
         const userInfo = {
           email,
           username: name,
@@ -151,7 +150,6 @@ const handleDiscoverRedirect = () => {
 
         setSuccess("Google login successful!");
 
-        // Store the Google user info in localStorage or sessionStorage
         const rememberMe = document.querySelector('input[name="rememberMe"]')?.checked || false;
         if (rememberMe) {
           localStorage.setItem("currentUser", JSON.stringify(userInfo));
@@ -159,11 +157,9 @@ const handleDiscoverRedirect = () => {
           sessionStorage.setItem("currentUser", JSON.stringify(userInfo));
         }
 
-        // Check if this Google user exists in our users database
         const users = JSON.parse(localStorage.getItem("users")) || [];
         const existingUser = users.find((user) => user.email === email && user.authProvider === "google");
 
-        // If user doesn't exist, add them to the database with the correct authProvider
         if (!existingUser) {
           users.push({
             email,

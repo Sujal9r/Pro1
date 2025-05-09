@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Header } from '../Navbar';
+import { Navbar } from '../Navbar/Navbar';
 import  Footer  from '../Footer/Footer';
 
 const Developer = () => {
@@ -22,7 +22,7 @@ const Developer = () => {
   return (
     <div className="w-full bg-gradient-to-r from-purple-400 via-purple-500 to-red-500 flex flex-col items-center">
       <div className="w-full">
-        <Header />
+        <Navbar />
         <div className="flex justify-center p-5 mt-[100px]">
           <input 
             type="text"

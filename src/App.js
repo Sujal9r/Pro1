@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Component/Login/Login';
-import Landing from './Component/Landing';
+import Landing from './Component/LandingPage/Landing.jsx';
 import SignUp from './Component/Login/Signup';
 import Hire from './Component/Hiring/Hire';
 import { Career } from './Component/Navbar/Career';

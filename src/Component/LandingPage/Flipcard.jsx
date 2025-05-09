@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FlipCard = ({ frontImage, backContent, category }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -13,7 +14,6 @@ const FlipCard = ({ frontImage, backContent, category }) => {
           isFlipped ? "rotate-y-180" : ""
         }`}
       >
-        {/* Front */}
         <div className="absolute w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 group-hover:scale-105">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black opacity-70"></div>
           <img
@@ -31,7 +31,6 @@ const FlipCard = ({ frontImage, backContent, category }) => {
           </div>
         </div>
         
-        {/* Back */}
         <div className="absolute w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-2xl rotate-y-180 bg-gradient-to-r from-purple-700 to-indigo-900 p-6 flex flex-col justify-center">
           <div className="text-white space-y-2">
             {backContent}
@@ -46,6 +45,10 @@ const FlipCard = ({ frontImage, backContent, category }) => {
 };
 
 export const Flipcard = () => {
+  const navigate = useNavigate();
+  const handleDiscoverRedirect = () => {
+    navigate("/Discover");
+  };
   const cardData = [
     {
       category: "E-Commerce",
@@ -91,16 +94,13 @@ export const Flipcard = () => {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Background with animated gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900 animate-gradient-slow"></div>
       
-      {/* Animated background patterns */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_1px,_transparent_1px)] bg-[size:20px_20px]"></div>
       </div>
 
       <div className="relative py-16 px-4 sm:px-6 lg:px-8">
-        {/* Header section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4 animate-pulse-slow">
             Websites We Create
@@ -110,7 +110,6 @@ export const Flipcard = () => {
           </p>
         </div>
 
-        {/* Grid card layout with fixed dimensions */}
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {cardData.map((card, index) => (
@@ -128,15 +127,15 @@ export const Flipcard = () => {
           </div>
         </div>
 
-        {/* Call to action */}
         <div className="mt-16 text-center">
-          <button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+          <button onClick={() => {
+            handleDiscoverRedirect();
+          }} className="px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
             Get Your Custom Website
           </button>
         </div>
       </div>
 
-      {/* Custom CSS for animations and 3D effects */}
       <style jsx>{`        
         @keyframes gradient-slow {
           0% { background-position: 0% 50%; }

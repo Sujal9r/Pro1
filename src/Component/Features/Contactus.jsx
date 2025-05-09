@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Header } from '../Navbar'
 import Footer from '../Footer/Footer'
+import { Navbar } from '../Navbar/Navbar'
 
 export default function ContactUs() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -35,7 +35,6 @@ export default function ContactUs() {
 
   const handleSubmit = () => {
     if (validateForm()) {
-      // Simulate form submission
       setTimeout(() => {
         setSubmitted(true)
         setFormData({ name: '', email: '', subject: '', message: '' })
@@ -46,12 +45,10 @@ export default function ContactUs() {
   return (
     <div className={`bg-gradient-to-br from-purple-900 via-indigo-800 to-purple-700 min-h-screen text-white overflow-hidden ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
     <div className='mt-[100px]'>
-        <Header/>
+        <Navbar/>
     </div>
  
-      {/* Main Content */}
       <main className="container mx-auto px-4 py-8 md:py-16 flex flex-col items-center">
-        {/* Title Section */}
         <div className="text-center mb-12">
           <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} transition-all duration-1000`}>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 via-indigo-100 to-purple-200">
@@ -63,9 +60,7 @@ export default function ContactUs() {
           </p>
         </div>
 
-        {/* Contact Form and Info Section */}
         <div className="w-full flex flex-col md:flex-row md:space-x-8 items-center md:items-start">
-          {/* Contact Form */}
           <div className={`w-full md:w-2/3 mb-12 md:mb-0 transform ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'} transition-all duration-1000 delay-300`}>
             {submitted ? (
               <div className="bg-black bg-opacity-20 backdrop-blur-md rounded-3xl p-8 text-center animate-fade-in">
@@ -150,7 +145,6 @@ export default function ContactUs() {
             )}
           </div>
 
-          {/* Contact Info */}
           <div className={`w-full md:w-1/3 transform ${isLoaded ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'} transition-all duration-1000 delay-500`}>
             <div className="bg-black bg-opacity-20 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
               <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
@@ -232,7 +226,6 @@ export default function ContactUs() {
         </div>
       </main>
 
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         {Array.from({ length: 6 }).map((_, index) => (
           <div
