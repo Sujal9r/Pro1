@@ -81,6 +81,22 @@ export const Navbar = ({ Redirect }) => {
     navigate("/signup");
   };
 
+  const handleEcommerceRedirect = () => {
+    navigate("/Ecommerce");
+  };
+
+  const handleEducationRedirect = () => {
+    navigate("/education");
+  };
+
+  const handleFinanceRedirect = () => {
+    navigate("/Finance");
+  };
+
+  const handleHealthcareRedirect = () => {
+    navigate("/Healthcare");
+  };
+
   const handleMouseEnter = (label) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setHoverItem(label);
@@ -100,20 +116,22 @@ export const Navbar = ({ Redirect }) => {
     { label: "Career", path: "/career", hoverColor: "purple" },
   ];
 
-  const dropdownItems = {
-    Services: [
-      { label: "Web Development", description: "Modern web solutions", icon: "💻" },
-      { label: "App Development", description: "Scalable mobile apps", icon: "📱" },
-      { label: "Digital Marketing", description: "Boost your brand", icon: "📈" },
-      { label: "UI/UX Design", description: "Beautiful user experiences", icon: "🎨" },
-    ],
-    Industries: [
-      { label: "Healthcare", description: "Medical solutions", icon: "🏥" },
-      { label: "Finance", description: "Banking & fintech", icon: "💰" },
-      { label: "Education", description: "EdTech platforms", icon: "🎓" },
-      { label: "E-Commerce", description: "Online retail solutions", icon: "🛒" },
-    ]
-  };
+ const dropdownItems = {
+  Services: [
+    { label: "Web Development", description: "Modern web solutions", icon: "💻"},
+    { label: "App Development", description: "Scalable mobile apps", icon: "📱" },
+    { label: "Digital Marketing", description: "Boost your brand", icon: "📈" },
+    { label: "UI/UX Design", description: "Beautiful user experiences", icon: "🎨" },
+  ],
+  Industries: [
+    { label: "Healthcare", description: "Medical solutions", icon: "🏥" , onClick: handleHealthcareRedirect},
+    { label: "Finance", description: "Banking & fintech", icon: "💰", onClick: handleFinanceRedirect },
+    { label: "Education", description: "EdTech platforms", icon: "🎓", onClick: handleEducationRedirect },
+    { label: "E-Commerce", description: "Online retail solutions", icon: "🛒", onClick: handleEcommerceRedirect  },
+  ]
+};
+
+
 
   return (
     <header
@@ -188,20 +206,24 @@ export const Navbar = ({ Redirect }) => {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {dropdownItems[item.label].map((dropdownItem, i) => (
-                        <div
-                          key={i}
-                          className="p-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 rounded-lg transition group/item border border-transparent hover:border-purple-100"
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="text-lg">{dropdownItem.icon}</span>
-                            <h4 className="font-bold text-sm text-blue-800 group-hover/item:text-purple-700 transition-colors">
-                              {dropdownItem.label}
-                            </h4>
-                          </div>
-                          <p className="text-xs text-gray-600 mt-1 pl-7">
-                            {dropdownItem.description}
-                          </p>
-                        </div>
+                       <div
+  key={i}
+  className="p-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 rounded-lg transition group/item border border-transparent hover:border-purple-100"
+>
+  <div
+    className="flex items-center gap-2"
+    onClick={dropdownItem.onClick}
+  >
+    <span className="text-lg">{dropdownItem.icon}</span>
+    <h4 className="font-bold text-sm text-blue-800 group-hover/item:text-purple-700 transition-colors">
+      {dropdownItem.label}
+    </h4>
+  </div>
+  <p className="text-xs text-gray-600 mt-1 pl-7">
+    {dropdownItem.description}
+  </p>
+</div>
+
                       ))}
                     </div>
                   </div>
