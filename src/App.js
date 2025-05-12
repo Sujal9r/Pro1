@@ -14,6 +14,11 @@ import FinancePage from './Component/Navbar/Industries/Finance.jsx';
 import EcommercePage from './Component/Navbar/Industries/E-commerce.jsx';
 import Education from './Component/Navbar/Industries/Education.jsx';
 import Healthcare from './Component/Navbar/Industries/Healthcare.jsx';
+import Portfolio from './Component/Navbar/Portfolio.jsx';
+import UiuxDesign from './Component/Navbar/Services/UiuxDesign.jsx';
+import DigitalMarketing from './Component/Navbar/Services/DigitalMarketing.jsx';
+import AppDevelopment from './Component/Navbar/Services/AppDevelopment.jsx';
+import WebDevelopment from './Component/Navbar/Services/WebDevelopment.jsx';
 
 function App() {
   return (
@@ -24,12 +29,17 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path='/signup' element={<SignUp/>}/>
         <Route path="/login" element={<Login />} />
-        <Route path='/hiring' element={<Hire/>}/>
+        <Route path='/hiring' element={<Hire/>}/>                                                                                                                                                                                                                                               
         <Route path='/career' element={<Career/>}/>
-        <Route path='/ecommerce' element={<EcommercePage/>}/>
+        <Route path='/portfolio' element={<Portfolio/>}/>
+        <Route path='/ecommerce' element={<EcommercePage/>}/> 
         <Route path='/education' element={<Education/>}/>
         <Route path='/finance' element={<FinancePage/>}/>
         <Route path='/healthcare' element={<Healthcare/>}/>
+        <Route path='/app-development' element={<AppDevelopment/>}/>
+        <Route path='/digital-marketing' element={<DigitalMarketing/>}/>
+        <Route path='/ui-ux-design' element={<UiuxDesign/>}/>
+        <Route path='/web-development' element={<WebDevelopment/>}/>
         <Route path='/discover' element={<Discover/>}/>
         <Route path='/support' element={<Support/>}/>
         <Route path='/contactus' element={<Contactus/>}/>

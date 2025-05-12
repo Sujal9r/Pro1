@@ -242,7 +242,7 @@ export default function TechRevolution() {
                 <div className="inline-block px-3 py-1 rounded-full bg-blue-900/50 text-blue-300 text-xs font-medium mb-4">NEXT GENERATION TECHNOLOGY</div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
                   <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 text-transparent bg-clip-text">S9R</span> 
-                  <span className="text-white">Technology</span>
+                  <span className="text-white"> Technology</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
                   The world's first neural-quantum computing platform, delivering unprecedented computational capabilities with intuitive dimensional interfaces.
