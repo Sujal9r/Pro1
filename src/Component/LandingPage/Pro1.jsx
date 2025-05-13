@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ComButton } from "../Common/ComButton";
 
 export const Pro1 = () => {
 const navigate = useNavigate();
@@ -32,14 +33,7 @@ const handleDiscoverRedirect = () => {
           Experience revolutionary, futuristic technology solutions that
           transform how businesses operate in the digital landscape.
         </p>
-        <button
-          onClick={() => {
-            handleDiscoverRedirect();
-          }}
-          className="tech-button"
-        >
-          Discover More
-        </button>
+        <div className="p-[2vh]"><ComButton customStyle={" px-10 py-4"} onClick={handleDiscoverRedirect} title={"Discover More"}/></div>
       </div>
     </div>
   );

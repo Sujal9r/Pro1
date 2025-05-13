@@ -47,29 +47,33 @@ export const Pro2 = () => {
   ];
 
   return (
-    <div  className="bg-sky-400 py-12">
-      <h2 className="text-center text-3xl font-bold mb-4">
-        Why <span className="text-purple-600">Choose Us</span>
-      </h2>
-      <p className="text-center text-gray-600 mb-10">
-        We provide you with significant benefits to help you with your digital development.
-      </p>
+    <div  className=" bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900 animate-gradient-slow py-12">
+           <div className="relative py-16 px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="h-[9vh] text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-4 animate-pulse-slow">
+           Why Choose us
+          </h1>
+          <p className="max-w-3xl mx-auto text-lg text-purple-100 leading-relaxed">
+             We provide you with significant benefits to help you with your digital development.
+          </p>
+        </div>
       <div className="flex flex-wrap justify-center gap-8 px-6">
         {data.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 p-6 w-[300px] text-center group"
+            className="bg-gradient-to-r from-purple-700 to-yellow-300 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 p-6 w-[300px] text-center group"
           >
             <div className="text-4xl bg-blue-100 w-16 h-16 mx-auto flex items-center justify-center rounded-full mb-4 group-hover:bg-indigo-800 transition-colors duration-300">
               {item.icon}
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-purple-900">
+            <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-white">
               {item.title}
             </h3>
-            <p className="text-gray-600 text-sm">{item.description}</p>
+            <p className="text-gray-800 text-sm">{item.description}</p>
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

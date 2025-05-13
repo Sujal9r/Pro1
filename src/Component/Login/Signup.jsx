@@ -142,7 +142,7 @@ const SignUp = () => {
                     } rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500`}
                   />
                   <div
-                    className="text-xl absolute right-3 top-4 cursor-pointer text-sky-800"
+                    className="text-xl absolute right-3 top-5 cursor-pointer text-sky-800"
                     onClick={() => setShowPassword((prev) => !prev)}
                   >
                     {showPassword ? <BsEye /> : <BsEyeSlash />}

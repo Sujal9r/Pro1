@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ComButton } from '../Common/ComButton';
 
 
 const developerTypes = [
@@ -66,9 +67,8 @@ const reDirect = () => {
             <div className="text-6xl mb-4">{dev.icon}</div>
             <h2 className="text-xl font-semibold mb-2">{dev.type}</h2>
             <p className="text-gray-600 text-center mb-4">{dev.description}</p>
-            <button onClick={reDirect} className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-800">
-              Hire Now
-            </button>
+            
+            <ComButton customStyle={" px-7 py-2 bg-gradient-to-br from-purple-900 via-indigo-800 to-blue-900 animate-gradient-slow "} onClick={reDirect} title={'Hire now'}/>
           </div>
 
         ))}
