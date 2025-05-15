@@ -283,12 +283,6 @@ export const Portfolio = () => {
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-8 md:mt-12">
-            <button className="bg-gray-800 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
-              View All Projects
-            </button>
-          </div>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from '../Footer/Footer';
 import { Navbar } from '../Navbar/Navbar';
+import { ComButton } from '../Common/ComButton';
 
 const CustomIcon = ({ type }) => {
   switch (type) {
@@ -83,7 +84,7 @@ const VideoModal = ({ isOpen, onClose, videoId }) => {
         <div className="aspect-video w-full">
           <iframe
             className="w-full h-full rounded-lg"
-            src={`https://www.youtube.com/watch?v=${videoId}?autoplay=1`}
+            src={`https://youtu.be/XO8wew38VM8`}
             title="S9R Technology Demo"
             allowFullScreen
           ></iframe>
@@ -205,6 +206,10 @@ export default function TechRevolution() {
     { value: "3,721", label: "Enterprise Deployments" }
   ];
 
+const handleScheduleCall = () => {
+  window.open('https://calendly.com/sujalsukoimk5','_blank')
+};
+
   return (
     <div>
       <Navbar/>
@@ -248,10 +253,10 @@ export default function TechRevolution() {
                   The world's first neural-quantum computing platform, delivering unprecedented computational capabilities with intuitive dimensional interfaces.
                 </p>
                 <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                  <button className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium flex items-center transition-all">
-                    Reserve Access
+                  <ComButton customStyle={" px-10 py-4  bg-gradient-to-br from-purple-900"} title={"Schedule a call"}  onClick={handleScheduleCall}>
+                    Schedule call
                     <CustomIcon type="arrow-right" />
-                  </button>
+                  </ComButton >
                   <button 
                     className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-gray-300 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-medium flex items-center transition-all"
                     onClick={() => setIsVideoModalOpen(true)}

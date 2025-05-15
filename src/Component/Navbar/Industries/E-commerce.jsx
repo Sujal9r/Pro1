@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar } from "../Navbar";
 import Footer from "../../Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import { ComButton } from "../../Common/ComButton";
 
 export default function EcommercePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -63,47 +64,6 @@ export default function EcommercePage() {
     },
   ];
 
-  const showcaseItems = [
-    {
-      id: 1,
-      name: "Basic E-commerce",
-      price: 999,
-      features: [
-        "Responsive Design",
-        "Up to 100 Products",
-        "Payment Gateway",
-        "3 Months Support",
-      ],
-      popular: false,
-    },
-    {
-      id: 2,
-      name: "Premium Store",
-      price: 2499,
-      features: [
-        "Advanced UI/UX",
-        "Unlimited Products",
-        "Multiple Payment Options",
-        "Inventory Management",
-        "1 Year Support",
-      ],
-      popular: true,
-    },
-    {
-      id: 3,
-      name: "Enterprise Solution",
-      price: 4999,
-      features: [
-        "Custom Design",
-        "Full Integration",
-        "Analytics Dashboard",
-        "Multiple Currencies",
-        "24/7 Priority Support",
-      ],
-      popular: false,
-    },
-  ];
-
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -124,6 +84,10 @@ export default function EcommercePage() {
       image: "/api/placeholder/64/64",
     },
   ];
+
+    const handleScheduleCall = () => {
+    window.open("https://calendly.com/sujalsukoimk5", "_blank");
+  };
 
   return (
     <div className="bg-gradient-to-b from-purple-900 via-indigo-900 to-sky-900 text-white min-h-screen">
@@ -201,61 +165,6 @@ export default function EcommercePage() {
                   index === activeFeature ? "bg-sky-400" : "bg-indigo-600"
                 }`}
               />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 text-sky-200">
-            E-commerce Solutions
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {showcaseItems.map((item) => (
-              <div
-                key={item.id}
-                className={`bg-gradient-to-b ${
-                  item.popular
-                    ? "from-indigo-700 to-purple-900 border-2 border-sky-400"
-                    : "from-indigo-900 to-purple-950"
-                } rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-300`}
-              >
-                {item.popular && (
-                  <div className="bg-sky-500 text-white py-1 px-4 text-center font-bold">
-                    Most Popular
-                  </div>
-                )}
-
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-4 text-sky-200">
-                    {item.name}
-                  </h3>
-                  <div className="text-3xl font-bold mb-6">
-                    <span className="text-white">${item.price}</span>
-                  </div>
-
-                  <ul className="mb-8 space-y-2">
-                    {item.features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-sky-400 mr-2">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    className={`w-full py-3 rounded-lg font-bold ${
-                      item.popular
-                        ? "bg-sky-500 hover:bg-sky-600"
-                        : "bg-indigo-600 hover:bg-indigo-700"
-                    } transition-colors`}
-                  >
-                    Choose Plan
-                  </button>
-                </div>
-              </div>
             ))}
           </div>
         </div>
@@ -387,13 +296,17 @@ export default function EcommercePage() {
             <button className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all">
               Request a Quote
             </button>
-            <button className="bg-transparent border-2 border-white hover:bg-white hover:text-indigo-800 text-white font-bold py-3 px-8 rounded-lg text-lg transform hover:scale-105 transition-all">
-              Schedule a Demo
-            </button>
+            <ComButton
+              customStyle={" px-10 py-4  bg-gradient-to-br from-purple-900"}
+              title={"Schedule a call"}
+              onClick={handleScheduleCall}
+            >
+              Schedule call
+            </ComButton>
           </div>
         </div>
-        <Footer />
       </section>
+      <Footer />
     </div>
   );
 }

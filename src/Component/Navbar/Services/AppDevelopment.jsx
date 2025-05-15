@@ -218,19 +218,6 @@ export default function AppDevelopment() {
             <p className="text-xl text-blue-200 mb-10 max-w-lg">
               Transforming ideas into exceptional mobile experiences with cutting-edge technology and stunning design.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur group-hover:blur-md transition-all duration-300"></div>
-                <div className="relative bg-blue-900 border border-blue-500/50 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 group-hover:bg-blue-800">
-                  Get Started
-                </div>
-              </button>
-              <button className="relative">
-                <div className="relative bg-transparent border-2 border-blue-400/40 hover:border-blue-400/80 hover:bg-blue-800/20 text-blue-200 font-semibold py-3 px-8 rounded-lg transition-all duration-300">
-                  View Our Work
-                </div>
-              </button>
-            </div>
           </div>
 
           <div

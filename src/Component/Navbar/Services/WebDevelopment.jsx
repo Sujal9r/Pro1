@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navbar } from "../Navbar";
 import Footer from "../../Footer/Footer";
+import { ComButton } from "../../Common/ComButton";
 
 export default function WebDevelopment() {
   // eslint-disable-next-line
@@ -89,6 +90,10 @@ export default function WebDevelopment() {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleScheduleCall = () => {
+  window.open('https://calendly.com/sujalsukoimk5','_blank')
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 text-white">
@@ -293,69 +298,69 @@ export default function WebDevelopment() {
           <div className="h-1 w-24 bg-gradient-to-r from-purple-500 to-indigo-500 mx-auto mt-4"></div>
         </h2>
 
-          <div className="relative">
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 hidden md:block transform -translate-x-1/2"></div>
+        <div className="relative">
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 hidden md:block transform -translate-x-1/2"></div>
 
-            <div className="space-y-20">
-              {[
-                {
-                  title: "Discovery",
-                  description:
-                    "We begin by understanding your business goals, challenges, and technical requirements through in-depth consultation.",
-                },
-                {
-                  title: "Strategy",
-                  description:
-                    "Our team develops a comprehensive strategy and roadmap tailored to your specific needs and objectives.",
-                },
-                {
-                  title: "Development",
-                  description:
-                    "We bring your vision to life using cutting-edge technologies and industry best practices.",
-                },
-                {
-                  title: "Implementation",
-                  description:
-                    "We seamlessly integrate solutions into your existing systems with minimal disruption.",
-                },
-                {
-                  title: "Support",
-                  description:
-                    "Our relationship continues with ongoing support, maintenance, and optimization of your solutions.",
-                },
-              ].map((step, index) => (
-                <div
-                  key={index}
-                  className={`flex flex-col ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  } items-center gap-8`}
-                >
-                  <div className="md:w-1/2 relative">
-                    <div
-                      className={`pl-16 md:pl-0 ${
-                        index % 2 === 0
-                          ? "md:pr-16 text-left"
-                          : "md:pl-16 text-left md:text-right"
-                      }`}
-                    >
-                      <h3 className="text-2xl font-semibold mb-3 text-purple-200">
-                        {step.title}
-                      </h3>
-                      <p className="text-indigo-200/80">{step.description}</p>
-                    </div>
+          <div className="space-y-20">
+            {[
+              {
+                title: "Discovery",
+                description:
+                  "We begin by understanding your business goals, challenges, and technical requirements through in-depth consultation.",
+              },
+              {
+                title: "Strategy",
+                description:
+                  "Our team develops a comprehensive strategy and roadmap tailored to your specific needs and objectives.",
+              },
+              {
+                title: "Development",
+                description:
+                  "We bring your vision to life using cutting-edge technologies and industry best practices.",
+              },
+              {
+                title: "Implementation",
+                description:
+                  "We seamlessly integrate solutions into your existing systems with minimal disruption.",
+              },
+              {
+                title: "Support",
+                description:
+                  "Our relationship continues with ongoing support, maintenance, and optimization of your solutions.",
+              },
+            ].map((step, index) => (
+              <div
+                key={index}
+                className={`flex flex-col ${
+                  index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                } items-center gap-8`}
+              >
+                <div className="md:w-1/2 relative">
+                  <div
+                    className={`pl-16 md:pl-0 ${
+                      index % 2 === 0
+                        ? "md:pr-16 text-left"
+                        : "md:pl-16 text-left md:text-right"
+                    }`}
+                  >
+                    <h3 className="text-2xl font-semibold mb-3 text-purple-200">
+                      {step.title}
+                    </h3>
+                    <p className="text-indigo-200/80">{step.description}</p>
                   </div>
-                  <div className="md:w-1/2 bg-gradient-to-br from-indigo-800/40 to-purple-800/40 backdrop-blur-sm p-6 rounded-xl border border-indigo-700/50 aspect-video flex items-center justify-center">
-                    <div className="relative w-full h-full">
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 animate-pulse rounded-lg"></div>
-                      <div className="absolute inset-0 flex items-center justify-center text-5xl">
-                        {["🔍", "📝", "👨‍💻", "🚀", "🛠️"][index]}
-                      </div>
+                </div>
+                <div className="md:w-1/2 bg-gradient-to-br from-indigo-800/40 to-purple-800/40 backdrop-blur-sm p-6 rounded-xl border border-indigo-700/50 aspect-video flex items-center justify-center">
+                  <div className="relative w-full h-full">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 animate-pulse rounded-lg"></div>
+                    <div className="absolute inset-0 flex items-center justify-center text-5xl">
+                      {["🔍", "📝", "👨‍💻", "🚀", "🛠️"][index]}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
       </section>
 
       <section
@@ -380,9 +385,13 @@ export default function WebDevelopment() {
               help you achieve your digital transformation goals.
             </p>
             <div className="flex justify-center gap-4 flex-wrap">
-              <button className="bg-white hover:bg-purple-50 text-indigo-800 font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-white/20">
-                Schedule a Consultation
-              </button>
+              <ComButton
+                customStyle={" px-10 py-4  bg-gradient-to-br from-purple-900"}
+                title={"Schedule a call"}
+                onClick={handleScheduleCall}
+              >
+                Schedule call
+              </ComButton>
               <button className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300">
                 View Case Studies
               </button>

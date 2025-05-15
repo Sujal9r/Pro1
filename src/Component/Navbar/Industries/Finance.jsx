@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar } from "../Navbar";
 import Footer from "../../Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import { ComButton } from "../../Common/ComButton";
 
 export default function FinancePage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -59,65 +60,24 @@ export default function FinancePage() {
     },
   ];
 
-  const financialSolutions = [
-    {
-      id: 1,
-      name: "Basic Financial Suite",
-      price: 1299,
-      features: [
-        "Secure Payment Gateway",
-        "Basic Financial Reports",
-        "User Authentication",
-        "3 Months Support",
-      ],
-      popular: false,
-    },
-    {
-      id: 2,
-      name: "Business Finance Pro",
-      price: 2999,
-      features: [
-        "Advanced Security Protocols",
-        "Comprehensive Analytics",
-        "Multi-currency Support",
-        "Automated Reconciliation",
-        "1 Year Priority Support",
-      ],
-      popular: true,
-    },
-    {
-      id: 3,
-      name: "Enterprise Financial System",
-      price: 5999,
-      features: [
-        "Custom Financial Workflows",
-        "API Integration",
-        "Advanced Fraud Detection",
-        "Multi-branch Support",
-        "Dedicated Account Manager",
-      ],
-      popular: false,
-    },
-  ];
-
   const testimonials = [
     {
       name: "Michael Chen",
       company: "NextGen Capital",
       text: "S9r's financial platform revolutionized our client onboarding process and increased transaction volume by 87%.",
-      image: "/api/placeholder/64/64",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKk1V1KmnFNNxctMJ2oNGTXKCrxT8PhOZUtw&s",
     },
     {
-      name: "Sophia Rodriguez",
+      name: "Pookie Kid",
       company: "Global Investment Partners",
       text: "The security and analytics capabilities built by S9r gave our investors the confidence they needed in our digital platform.",
-      image: "/api/placeholder/64/64",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi8BnEjvjFaqZGB6KPpTWA0b6ltUvgunIBdQ&s",
     },
     {
       name: "James Wilson",
       company: "Monarch Financial Services",
       text: "We needed a solution that could scale with our rapid growth. S9r delivered a robust platform that never misses a beat.",
-      image: "/api/placeholder/64/64",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTybX4RJpXyLJFWEYHYjIspjl0F34hQ0f6H0w&s",
     },
   ];
 
@@ -139,6 +99,13 @@ export default function FinancePage() {
       label: "Countries Served",
     },
   ];
+
+  const handleContactusRedirect = () => {
+    navigate("/Contactus");
+  };
+  const handleScheduleCall = () => {
+    window.open("https://calendly.com/sujalsukoimk5", "_blank");
+  };
 
   return (
     <div className="bg-gradient-to-b from-purple-900 via-indigo-900 to-sky-900 text-white min-h-screen">
@@ -166,9 +133,13 @@ export default function FinancePage() {
             >
               Explore Solutions
             </button>
-            <button className="bg-transparent border-2 border-sky-400 hover:bg-sky-900 transform hover:scale-105 transition-all text-sky-300 font-bold py-3 px-8 rounded-lg text-lg">
-              Schedule Consultation
-            </button>
+            <ComButton
+              customStyle={" px-10 py-4  bg-gradient-to-br from-purple-900"}
+              title={"Schedule a call"}
+              onClick={handleScheduleCall}
+            >
+              Schedule call
+            </ComButton>
           </div>
         </div>
       </section>
@@ -229,62 +200,6 @@ export default function FinancePage() {
                   index === activeFeature ? "bg-sky-400" : "bg-indigo-600"
                 }`}
               />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 text-sky-200">
-            Financial Technology Solutions
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {financialSolutions.map((solution) => (
-              <div
-                key={solution.id}
-                className={`bg-gradient-to-b ${
-                  solution.popular
-                    ? "from-indigo-700 to-purple-900 border-2 border-sky-400"
-                    : "from-indigo-900 to-purple-950"
-                } rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-all duration-300`}
-              >
-                {solution.popular && (
-                  <div className="bg-sky-500 text-white py-1 px-4 text-center font-bold">
-                    Most Popular
-                  </div>
-                )}
-
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-4 text-sky-200">
-                    {solution.name}
-                  </h3>
-                  <div className="text-3xl font-bold mb-6">
-                    <span className="text-white">${solution.price}</span>
-                    <span className="text-sm text-purple-300 ml-1">/month</span>
-                  </div>
-
-                  <ul className="mb-8 space-y-2">
-                    {solution.features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="text-sky-400 mr-2">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    className={`w-full py-3 rounded-lg font-bold ${
-                      solution.popular
-                        ? "bg-sky-500 hover:bg-sky-600"
-                        : "bg-indigo-600 hover:bg-indigo-700"
-                    } transition-colors`}
-                  >
-                    Get Started
-                  </button>
-                </div>
-              </div>
             ))}
           </div>
         </div>
@@ -461,13 +376,16 @@ export default function FinancePage() {
             <button className="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all">
               Book a Demo
             </button>
-            <button className="bg-transparent border-2 border-white hover:bg-white hover:text-indigo-800 text-white font-bold py-3 px-8 rounded-lg text-lg transform hover:scale-105 transition-all">
-              Contact Sales
+            <button
+              onClick={handleContactusRedirect}
+              className="bg-transparent border-2 border-white hover:bg-white hover:text-indigo-800 text-white font-bold py-3 px-8 rounded-lg text-lg transform hover:scale-105 transition-all"
+            >
+              Contact us
             </button>
           </div>
         </div>
-        <Footer />
       </section>
+      <Footer />
     </div>
   );
 }
