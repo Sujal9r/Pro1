@@ -84,9 +84,11 @@ const VideoModal = ({ isOpen, onClose, videoId }) => {
         <div className="aspect-video w-full">
           <iframe
             className="w-full h-full rounded-lg"
-            src={`https://youtu.be/XO8wew38VM8`}
+            src={`https://www.youtube.com/embed/${videoId}`}
             title="S9R Technology Demo"
+            frameBorder="0"
             allowFullScreen
+            
           ></iframe>
         </div>
         
