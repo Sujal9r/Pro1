@@ -213,12 +213,11 @@ const Hire = () => {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(56,189,248,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(56,189,248,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
         </div>
-        <Navbar />
 
         {[...Array(10)].map((_, i) => (
           <div
-            key={i}
-            className="absolute opacity-20 animate-pulse"
+          key={i}
+          className="absolute opacity-20 animate-pulse"
             style={{
               width: `${Math.random() * 100 + 50}px`,
               height: `${Math.random() * 4 + 1}px`,
@@ -243,10 +242,11 @@ const Hire = () => {
                 Math.random() * 0.5 + 0.1
               })`,
             }}
-          />
-        ))}
+            />
+          ))}
       </div>
 
+          <Navbar />
       <div className="w-full">
         <div className="container mx-auto px-4 py-16 pt-16">
           <div className="text-center mb-16">
