@@ -6,7 +6,6 @@ import ComButton from '../../components/common/ComButton';
 
 export default function DigitalMarketing() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeFeature, setActiveFeature] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const navigate = useNavigate();
@@ -29,44 +28,9 @@ export default function DigitalMarketing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 3000);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line
-  }, []);
-
-  const features = [
-    {
-      title: "Responsive Design",
-      description:
-        "Websites that look stunning on every device from mobile to desktop",
-      icon: "🖥️",
-    },
-    {
-      title: "Animated UI/UX",
-      description:
-        "Smooth, eye-catching animations that enhance user experience",
-      icon: "✨",
-    },
-    {
-      title: "Secure Payment Gateway",
-      description:
-        "Multiple payment options with top-tier security for your customers",
-      icon: "🔒",
-    },
-    {
-      title: "Inventory Management",
-      description:
-        "Real-time tracking and automated stock management solutions",
-      icon: "📦",
-    },
-  ];
-
-    const handleScheduleCall = () => {
-  window.open('https://calendly.com/sujalsukoimk5','_blank')
-};
+  const handleScheduleCall = () => {
+    window.open('https://calendly.com/sujalsukoimk5','_blank')
+  };
 
   const testimonials = [
     {
@@ -99,11 +63,10 @@ export default function DigitalMarketing() {
       >
         <div className="max-w-6xl mx-auto mt-[100px]">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-indigo-300 to-sky-300">
-            Transform Your Business with Custom E-commerce Solutions
+            Transform Your Business with Digital Marketing Solutions
           </h1>
           <p className="text-xl md:text-2xl mb-12 text-sky-100 max-w-3xl">
-            S9r Technology builds powerful, beautiful online stores that convert
-            visitors into customers.
+            S9r Technology builds powerful digital marketing strategies that drive growth and convert visitors into customers.
           </p>
 
           <div className="flex flex-col md:flex-row gap-6">
@@ -127,53 +90,10 @@ export default function DigitalMarketing() {
         </div>
       </section>
 
-      <section className="py-20 bg-indigo-900 bg-opacity-30 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-sky-200">
-            Powerful E-commerce Features
-          </h2>
-
-          <div className="relative h-64 mb-12">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={` flex absolute top-0 w-[70vw] justify-center transition-all duration-700 transform ${
-                  index === activeFeature
-                    ? "opacity-100 translate-x-0"
-                    : index < activeFeature
-                    ? "opacity-0 -translate-x-full"
-                    : "opacity-0 translate-x-full"
-                }`}
-              >
-                <div className="bg-gradient-to-r from-purple-800 to-indigo-800 p-8 rounded-2xl shadow-2xl">
-                  <div className="text-5xl mb-4">{feature.icon}</div>
-                  <h3 className="text-2xl font-bold mb-2 text-sky-200">
-                    {feature.title}
-                  </h3>
-                  <p className="text-purple-100">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center gap-2">
-            {features.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveFeature(index)}
-                className={`w-3 h-3 rounded-full ${
-                  index === activeFeature ? "bg-sky-400" : "bg-indigo-600"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-24 bg-indigo-900 bg-opacity-20">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-20 text-sky-200">
-            Our E-commerce Development Process
+            Our Digital Marketing Development Process
           </h2>
 
           <div className="relative">
@@ -183,31 +103,31 @@ export default function DigitalMarketing() {
               {
                 title: "Discovery & Planning",
                 description:
-                  "We analyze your business needs and create a comprehensive development plan.",
+                  "We analyze your business needs and create a comprehensive marketing strategy.",
                 icon: "🔍",
               },
               {
-                title: "Design & Prototyping",
+                title: "Strategy & Design",
                 description:
-                  "Our designers create stunning mockups and interactive prototypes for your approval.",
+                  "Our team creates compelling campaigns and marketing materials for your approval.",
                 icon: "🎨",
               },
               {
-                title: "Development",
+                title: "Implementation",
                 description:
-                  "Our expert developers bring the designs to life with clean, efficient code.",
+                  "We execute your marketing campaigns across multiple channels with precision.",
                 icon: "💻",
               },
               {
-                title: "Testing & Quality Assurance",
+                title: "Testing & Optimization",
                 description:
-                  "Rigorous testing across devices and browsers ensures everything works perfectly.",
+                  "Continuous testing and optimization ensures maximum ROI and performance.",
                 icon: "🧪",
               },
               {
-                title: "Launch & Support",
+                title: "Analytics & Support",
                 description:
-                  "We launch your store and provide ongoing support to ensure continued success.",
+                  "We provide detailed analytics and ongoing support to ensure continued success.",
                 icon: "🚀",
               },
             ].map((step, index) => (
@@ -285,11 +205,10 @@ export default function DigitalMarketing() {
       <section className="py-20 px-4 bg-gradient-to-r from-purple-800 via-indigo-800 to-sky-800">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Ready to Transform Your Online Business?
+            Ready to Transform Your Digital Marketing?
           </h2>
           <p className="text-xl mb-12 text-sky-100">
-            Let's build an e-commerce solution that drives sales and delights
-            your customers.
+            Let's build a digital marketing strategy that drives growth and delights your customers.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
