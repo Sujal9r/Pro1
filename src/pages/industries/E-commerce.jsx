@@ -6,7 +6,6 @@ import ComButton from '../../components/common/ComButton';
 
 export default function EcommercePage() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeFeature, setActiveFeature] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const navigate = useNavigate();
@@ -29,41 +28,6 @@ export default function EcommercePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 3000);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line
-  }, []);
-
-  const features = [
-    {
-      title: "Responsive Design",
-      description:
-        "Websites that look stunning on every device from mobile to desktop",
-      icon: "🖥️",
-    },
-    {
-      title: "Animated UI/UX",
-      description:
-        "Smooth, eye-catching animations that enhance user experience",
-      icon: "✨",
-    },
-    {
-      title: "Secure Payment Gateway",
-      description:
-        "Multiple payment options with top-tier security for your customers",
-      icon: "🔒",
-    },
-    {
-      title: "Inventory Management",
-      description:
-        "Real-time tracking and automated stock management solutions",
-      icon: "📦",
-    },
-  ];
-
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -85,7 +49,7 @@ export default function EcommercePage() {
     },
   ];
 
-    const handleScheduleCall = () => {
+  const handleScheduleCall = () => {
     window.open("https://calendly.com/sujalsukoimk5", "_blank");
   };
 
@@ -123,49 +87,6 @@ export default function EcommercePage() {
             >
               View Portfolio
             </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-indigo-900 bg-opacity-30 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-sky-200">
-            Powerful E-commerce Features
-          </h2>
-
-          <div className="relative h-64 mb-12">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`absolute top-0 left-0 w-full transition-all duration-700 transform ${
-                  index === activeFeature
-                    ? "opacity-100 translate-x-0"
-                    : index < activeFeature
-                    ? "opacity-0 -translate-x-full"
-                    : "opacity-0 translate-x-full"
-                }`}
-              >
-                <div className="bg-gradient-to-r from-purple-800 to-indigo-800 p-8 rounded-2xl shadow-2xl">
-                  <div className="text-5xl mb-4">{feature.icon}</div>
-                  <h3 className="text-2xl font-bold mb-2 text-sky-200">
-                    {feature.title}
-                  </h3>
-                  <p className="text-purple-100">{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center gap-2">
-            {features.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveFeature(index)}
-                className={`w-3 h-3 rounded-full ${
-                  index === activeFeature ? "bg-sky-400" : "bg-indigo-600"
-                }`}
-              />
-            ))}
           </div>
         </div>
       </section>

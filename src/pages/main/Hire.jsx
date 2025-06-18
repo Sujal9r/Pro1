@@ -23,34 +23,56 @@ const Hire = () => {
     title: "",
     developer: "",
     country: "",
-    skills: [], 
+    skills: [],
   });
 
   const [skillsInput, setSkillsInput] = useState("");
 
-  const fetchDevelopers = () => {
-    setIsLoading(true);
-    fetch("http://localhost:7447/api/v1/developer/getAlldevelopers")
-      .then((res) => res.json())
-      .then((data) => {
-        setDevelopers(data.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching developers:", err);
-        setIsLoading(false);
-        showNotification("Failed to load developers", "error");
+  const developerType = sessionStorage.getItem('developerType') || ""; // yahan se type milega
+
+  const fetchDevelopers = async () => {
+    try {
+      setIsLoading(true);
+      const res = await fetch("http://localhost:5000/api/users", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      if (!res.ok) throw new Error("Network response was not ok");
+
+      const data = await res.json();
+      setDevelopers(Array.isArray(data.data) ? data.data : []);
+    } catch (err) {
+      console.error("Error fetching developers:", err);
+      showNotification("Failed to load developers", "error");
+      setDevelopers([]); // fallback to empty array on error
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchDevelopers();
     // eslint-disable-next-line
   }, []);
+  console.log("Developer Type:", developerType);
+  console.log("Developers:", developers);
 
-  const filteredDevelopers = developers.filter((dev) =>
-    dev.name.toLowerCase().includes(search.toLowerCase())
-  );
+  // See All Developers button handler
+  const handleSeeAll = () => {
+    sessionStorage.removeItem('developerType');
+    window.location.reload(); // reload to re-fetch and show all
+  };
+
+  // Filter developers by type and search
+  const filteredDevelopers = Array.isArray(developers)
+    ? developers.filter((dev) =>
+        (!developerType || dev.developer?.toLowerCase().includes(developerType.toLowerCase())) &&
+        dev.name.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
   const showNotification = (message, type) => {
     setNotification({ show: true, message, type });
@@ -77,23 +99,23 @@ const Hire = () => {
 
     const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
 
-    fetch("http://localhost:7447/api/v1/developer/createdeveloper", {
+    fetch("http://localhost:5000/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...formData, skills: skillsArray }), 
+      body: JSON.stringify({ ...formData, skills: skillsArray }),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(async (res) => {
+        const data = await res.json();
         setIsLoading(false);
-        if (data.status === 200 || data.status === 201) {
+        if (res.ok) {
           showNotification("Developer created successfully", "success");
           fetchDevelopers();
           setFormVisible(false);
           resetForm();
         } else {
-          showNotification("Failed to create developer", "error");
+          showNotification(data.message || "Failed to create developer", "error");
         }
       })
       .catch((err) => {
@@ -110,26 +132,26 @@ const Hire = () => {
     const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
 
     fetch(
-      `http://localhost:7447/api/v1/developer/updatebyid/${editingDeveloper._id}`,
+      `http://localhost:5000/api/users/${editingDeveloper.id}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...formData, skills: skillsArray }), 
+        body: JSON.stringify({ ...formData, skills: skillsArray }),
       }
     )
-      .then((res) => res.json())
-      .then((data) => {
+      .then(async (res) => {
+        const data = await res.json();
         setIsLoading(false);
-        if (data.status === 200) {
+        if (res.ok) {
           showNotification("Developer updated successfully", "success");
           fetchDevelopers();
           setFormVisible(false);
           setEditingDeveloper(null);
           resetForm();
         } else {
-          showNotification("Failed to update developer", "error");
+          showNotification(data.message || "Failed to update developer", "error");
         }
       })
       .catch((err) => {
@@ -142,18 +164,18 @@ const Hire = () => {
   const handleDeleteDeveloper = (id) => {
     setIsLoading(true);
 
-    fetch(`http://localhost:7447/api/v1/developer/deletebyid/${id}`, {
+    fetch(`http://localhost:5000/api/users/${id}`, {
       method: "DELETE",
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(async (res) => {
+        const data = await res.json();
         setIsLoading(false);
-        if (data.status === 200) {
+        if (res.ok) {
           showNotification("Developer deleted successfully", "success");
           fetchDevelopers();
           setDeleteConfirmId(null);
         } else {
-          showNotification("Failed to delete developer", "error");
+          showNotification(data.message || "Failed to delete developer", "error");
         }
       })
       .catch((err) => {
@@ -173,7 +195,7 @@ const Hire = () => {
       country: "",
       skills: [],
     });
-    setSkillsInput(""); 
+    setSkillsInput("");
   };
 
   const openEditForm = (dev) => {
@@ -185,9 +207,9 @@ const Hire = () => {
       title: dev.title || "",
       developer: dev.developer || "",
       country: dev.country || "",
-      skills: dev.skills || [], 
+      skills: dev.skills || [],
     });
-    setSkillsInput(dev.skills ? dev.skills.join(", ") : ""); 
+    setSkillsInput(dev.skills ? dev.skills.join(", ") : "");
     setFormVisible(true);
   };
 
@@ -207,8 +229,13 @@ const Hire = () => {
     return colors[index];
   };
 
+  // Button label dynamic
+  const addButtonLabel = developerType
+    ? `Add ${developerType}`
+    : "Add New Developer";
+
   return (
-    <div className=" w-full bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 flex flex-col relative overflow-hidden">
+    <div className="w-full bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 flex flex-col relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(56,189,248,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(56,189,248,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
@@ -216,8 +243,8 @@ const Hire = () => {
 
         {[...Array(10)].map((_, i) => (
           <div
-          key={i}
-          className="absolute opacity-20 animate-pulse"
+            key={i}
+            className="absolute opacity-20 animate-pulse"
             style={{
               width: `${Math.random() * 100 + 50}px`,
               height: `${Math.random() * 4 + 1}px`,
@@ -238,15 +265,14 @@ const Hire = () => {
               height: `${Math.random() * 6 + 2}px`,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              backgroundColor: `rgba(56, 189, 248, ${
-                Math.random() * 0.5 + 0.1
-              })`,
+              backgroundColor: `rgba(56, 189, 248, ${Math.random() * 0.5 + 0.1
+                })`,
             }}
-            />
-          ))}
+          />
+        ))}
       </div>
 
-          <Navbar />
+      <Navbar />
       <div className="w-full">
         <div className="container mx-auto px-4 py-16 pt-16">
           <div className="text-center mb-16">
@@ -260,8 +286,36 @@ const Hire = () => {
             </p>
           </div>
 
-          <div className="flex justify-center p-5 mb-12">
-            <div className="relative w-full max-w-3xl group">
+          {/* Buttons Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 w-full max-w-2xl mx-auto">
+            {developerType && (
+              <button
+                onClick={handleSeeAll}
+                className="w-full sm:w-auto px-5 py-2 bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg text-white text-base font-medium hover:shadow-lg hover:shadow-gray-500/30 transition-all duration-300"
+              >
+                See All Developers
+              </button>
+            )}
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-12 w-full max-w-3xl mx-auto">
+            <button
+              onClick={() => {
+                setFormVisible(true);
+                setEditingDeveloper(null);
+                resetForm();
+                if (developerType) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    developer: developerType,
+                  }));
+                }
+              }}
+              className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-lg text-white text-lg font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              {addButtonLabel}
+            </button>
+            <div className="relative w-full">
               <input
                 type="text"
                 placeholder="Search developers by name..."
@@ -289,24 +343,10 @@ const Hire = () => {
             </div>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <button
-              onClick={() => {
-                setFormVisible(true);
-                setEditingDeveloper(null);
-                resetForm();
-              }}
-              className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-lg text-white text-lg font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-1"
-            >
-              Add New Developer
-            </button>
-          </div>
-
           {notification.show && (
             <div
-              className={`fixed top-5 right-5 p-4 rounded-md shadow-lg z-50 transition-all duration-300 ${
-                notification.type === "success" ? "bg-green-500" : "bg-red-500"
-              }`}
+              className={`fixed top-5 right-5 p-4 rounded-md shadow-lg z-50 transition-all duration-300 ${notification.type === "success" ? "bg-green-500" : "bg-red-500"
+                }`}
             >
               <p className="text-white font-medium">{notification.message}</p>
             </div>
@@ -362,9 +402,8 @@ const Hire = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         readOnly={!!editingDeveloper}
-                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${
-                          editingDeveloper ? "cursor-not-allowed opacity-70" : ""
-                        }`}
+                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${editingDeveloper ? "cursor-not-allowed opacity-70" : ""
+                          }`}
                         required
                       />
                     </div>
@@ -379,9 +418,8 @@ const Hire = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         readOnly={!!editingDeveloper}
-                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${
-                          editingDeveloper ? "cursor-not-allowed opacity-70" : ""
-                        }`}
+                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${editingDeveloper ? "cursor-not-allowed opacity-70" : ""
+                          }`}
                         required
                       />
                     </div>
@@ -429,6 +467,7 @@ const Hire = () => {
                         className="w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                         placeholder="e.g. React.js Developer, MERN Stack Developer"
                         required
+                        readOnly={!!developerType}
                       />
                     </div>
 
@@ -454,7 +493,7 @@ const Hire = () => {
                       <input
                         type="text"
                         name="skills"
-                        value={skillsInput} 
+                        value={skillsInput}
                         onChange={handleSkillsChange}
                         className="w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                         placeholder="e.g. React, Node.js, MongoDB (comma-separated)"
@@ -477,16 +516,15 @@ const Hire = () => {
                     </button>
                     <button
                       type="submit"
-                      className={`px-6 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-md text-white font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ${
-                        isLoading ? "opacity-75 cursor-not-allowed" : ""
-                      }`}
+                      className={`px-6 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-md text-white font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ${isLoading ? "opacity-75 cursor-not-allowed" : ""
+                        }`}
                       disabled={isLoading}
                     >
                       {isLoading
                         ? "Processing..."
                         : editingDeveloper
-                        ? "Update Developer"
-                        : "Add Developer"}
+                          ? "Update Developer"
+                          : "Add Developer"}
                     </button>
                   </div>
                 </form>
@@ -532,9 +570,7 @@ const Hire = () => {
                   </button>
                   <button
                     onClick={() => handleDeleteDeveloper(deleteConfirmId)}
-                    className={`px-4 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors duration-300 ${
-                      isLoading ? "opacity-75 cursor-not-allowed" : ""
-                    }`}
+                    className={`px-4 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors duration-300 ${isLoading ? "opacity-75 cursor-not-allowed" : ""}`}
                     disabled={isLoading}
                   >
                     {isLoading ? "Deleting..." : "Delete Developer"}
@@ -553,9 +589,8 @@ const Hire = () => {
               {filteredDevelopers.map((dev) => (
                 <div
                   key={dev._id}
-                  className={`relative bg-black/20 backdrop-blur-md p-8 rounded-md shadow-2xl border border-cyan-800/50 group transition-all duration-500 transform hover:scale-105 hover:shadow-cyan-900/30 hover:shadow-lg overflow-hidden ${
-                    activeCard === dev._id ? "scale-105" : ""
-                  }`}
+                  className={`relative bg-black/20 backdrop-blur-md p-8 rounded-md shadow-2xl border border-cyan-800/50 group transition-all duration-500 transform hover:scale-105 hover:shadow-cyan-900/30 hover:shadow-lg overflow-hidden ${activeCard === dev._id ? "scale-105" : ""
+                    }`}
                   onMouseEnter={() => setActiveCard(dev._id)}
                   onMouseLeave={() => setActiveCard(null)}
                 >
@@ -671,7 +706,7 @@ const Hire = () => {
                         Edit
                       </button>
                       <button
-                        onClick={() => setDeleteConfirmId(dev._id)}
+                        onClick={() => setDeleteConfirmId(dev.id)}
                         className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-700 rounded-sm text-white text-sm font-medium transition-all duration-300 hover:shadow-md hover:shadow-red-700/50"
                       >
                         Delete
