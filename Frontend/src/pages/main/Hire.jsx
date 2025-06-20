@@ -298,7 +298,7 @@ const Hire = () => {
 
           <div className="w-full max-w-3xl mx-auto mb-8">
             <div className="flex flex-wrap gap-4 justify-center">
-              
+
               <button
                 onClick={() => {
                   sessionStorage.removeItem('developerType');
