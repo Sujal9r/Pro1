@@ -169,7 +169,7 @@ const Pro3 = () => {
             <div className="relative">
               {/* Decorative Element - Hidden on mobile, shown on larger screens */}
               <div 
-                className="hidden sm:block absolute -top-6 lg:-top-8 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 lg:-left-4 w-16 sm:w-20 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full"
+                className="hidden sm:block absolute -top-6 lg:-top-8 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0 w-16 sm:w-20 h-1 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full"
                 style={{ animation: 'expandWidth 1s ease-out 0.5s both' }}
               />
               

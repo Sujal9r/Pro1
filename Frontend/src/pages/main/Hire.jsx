@@ -60,12 +60,6 @@ const Hire = () => {
   console.log("Developer Type:", developerType);
   console.log("Developers:", developers);
 
-  // See All Developers button handler
-  const handleSeeAll = () => {
-    sessionStorage.removeItem('developerType');
-    window.location.reload(); // reload to re-fetch and show all
-  };
-
   // Filter developers by type and search
   const filteredDevelopers = Array.isArray(developers)
     ? developers.filter((dev) =>
