@@ -1,13 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
 const Pro3 = () => {
-  const targetNumbers = {
-    revenue: 245,
-    audience: 130,
-    brands: 50,
-    awards: 24,
-  };
-
   const duration = 2000;
   const [counts, setCounts] = useState({
     revenue: 0,
@@ -53,6 +46,13 @@ const Pro3 = () => {
   
   useEffect(() => {
     if (isVisible) {
+      const targetNumbers = {
+        revenue: 245,
+        audience: 130,
+        brands: 50,
+        awards: 24,
+      };
+      
       Object.keys(targetNumbers).forEach((key) => {
         const target = targetNumbers[key];
         let start = 0;
@@ -68,7 +68,7 @@ const Pro3 = () => {
         }, 30);
       });
     }
-  }, [isVisible]);
+  }, [isVisible, duration]);
 
   const statsData = [
     {
