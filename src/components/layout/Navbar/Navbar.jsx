@@ -501,11 +501,6 @@ const Navbar = ({ Redirect }) => {
           )}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-purple-500 via-blue-400 to-green-300"
-        style={{ width: `${scrollPercentage}%`, transition: "width 0.2s ease" }}
-      ></div>
     </header>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Footer from '../../components/layout/Footer/Footer';
-import Navbar from '../../components/layout/Navbar/Navbar';
+import Footer from "../../components/layout/Footer/Footer";
+import Navbar from "../../components/layout/Navbar/Navbar";
 
 const Hire = () => {
   const [developers, setDevelopers] = useState([]);
@@ -28,7 +28,7 @@ const Hire = () => {
 
   const [skillsInput, setSkillsInput] = useState("");
 
-  const developerType = sessionStorage.getItem('developerType') || ""; 
+  const developerType = sessionStorage.getItem("developerType") || "";
 
   const fetchDevelopers = async () => {
     try {
@@ -62,9 +62,13 @@ const Hire = () => {
 
   // Filter developers by type and search
   const filteredDevelopers = Array.isArray(developers)
-    ? developers.filter((dev) =>
-        (!developerType || dev.developer?.toLowerCase().includes(developerType.toLowerCase())) &&
-        dev.name.toLowerCase().includes(search.toLowerCase())
+    ? developers.filter(
+        (dev) =>
+          (!developerType ||
+            dev.developer
+              ?.toLowerCase()
+              .includes(developerType.toLowerCase())) &&
+          dev.name.toLowerCase().includes(search.toLowerCase())
       )
     : [];
 
@@ -91,7 +95,10 @@ const Hire = () => {
     // e.preventDefault();
     setIsLoading(true);
 
-    const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
+    const skillsArray = skillsInput
+      .split(",")
+      .map((skill) => skill.trim())
+      .filter((skill) => skill !== "");
 
     fetch("https://s9r-back.onrender.com/api/users", {
       method: "POST",
@@ -109,7 +116,10 @@ const Hire = () => {
           setFormVisible(false);
           resetForm();
         } else {
-          showNotification(data.message || "Failed to create developer", "error");
+          showNotification(
+            data.message || "Failed to create developer",
+            "error"
+          );
         }
       })
       .catch((err) => {
@@ -119,47 +129,47 @@ const Hire = () => {
       });
   };
 
-    const handleUpdateDeveloper = (data) => {
+  const handleUpdateDeveloper = (data) => {
+    // console.log(e.id,'hdhdhfsiuefiushefius')
+    // data.preventDefault()
+    console.log(data, "datakkjdhkdu");
+    setIsLoading(true);
 
-      // console.log(e.id,'hdhdhfsiuefiushefius')
-      // data.preventDefault()
-      console.log(data,'datakkjdhkdu')
-      setIsLoading(true);
+    const skillsArray = skillsInput
+      .split(",")
+      .map((skill) => skill.trim())
+      .filter((skill) => skill !== "");
 
-      const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
-
-      fetch(
-        `https://s9r-back.onrender.com/api/users/${data.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...formData, skills: skillsArray }),
+    fetch(`https://s9r-back.onrender.com/api/users/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...formData, skills: skillsArray }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        setIsLoading(false);
+        if (res.ok) {
+          showNotification("Developer updated successfully", "success");
+          fetchDevelopers();
+          setFormVisible(false);
+          setEditingDeveloper(null);
+          resetForm();
+        } else {
+          showNotification(
+            data.message || "Failed to update developer",
+            "error"
+          );
         }
-      )
-        .then(async (res) => {
-          const data = await res.json();
-          setIsLoading(false);
-          if (res.ok) {
-            showNotification("Developer updated successfully", "success");
-            fetchDevelopers();
-            setFormVisible(false);
-            setEditingDeveloper(null);
-            resetForm();
-          } else {
-            showNotification(data.message || "Failed to update developer", "error");
-          }
-        })
-        .catch((err) => {
-          console.error("Error updating developer:", err);
-          setIsLoading(false);
-          showNotification("Failed to update developer", "error");
-        });
-    };
+      })
+      .catch((err) => {
+        console.error("Error updating developer:", err);
+        setIsLoading(false);
+        showNotification("Failed to update developer", "error");
+      });
+  };
 
-
-   
   const handleDeleteDeveloper = (id) => {
     setIsLoading(true);
 
@@ -174,7 +184,10 @@ const Hire = () => {
           fetchDevelopers();
           setDeleteConfirmId(null);
         } else {
-          showNotification(data.message || "Failed to delete developer", "error");
+          showNotification(
+            data.message || "Failed to delete developer",
+            "error"
+          );
         }
       })
       .catch((err) => {
@@ -185,8 +198,10 @@ const Hire = () => {
   };
 
   const saveEdit = (e) => {
-            return editingDeveloper ? handleUpdateDeveloper(e) : handleCreateDeveloper(e);
-    };
+    return editingDeveloper
+      ? handleUpdateDeveloper(e)
+      : handleCreateDeveloper(e);
+  };
 
   const resetForm = () => {
     setFormData({
@@ -269,8 +284,9 @@ const Hire = () => {
               height: `${Math.random() * 6 + 2}px`,
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              backgroundColor: `rgba(56, 189, 248, ${Math.random() * 0.5 + 0.1
-                })`,
+              backgroundColor: `rgba(56, 189, 248, ${
+                Math.random() * 0.5 + 0.1
+              })`,
             }}
           />
         ))}
@@ -292,42 +308,52 @@ const Hire = () => {
 
           <div className="w-full max-w-3xl mx-auto mb-8">
             <div className="flex flex-wrap gap-4 justify-center">
-
               <button
                 onClick={() => {
-                  sessionStorage.removeItem('developerType');
+                  sessionStorage.removeItem("developerType");
                   window.location.reload();
                 }}
                 className={`
                   px-5 py-2 rounded-full font-semibold shadow-lg transition-all duration-300
                   border-2 border-indigo-700 bg-gradient-to-r from-gray-800 to-indigo-900 text-white/80
                   hover:from-indigo-700 hover:to-gray-800 hover:text-white
-                  ${!developerType ? "ring-4 ring-indigo-400/40 border-indigo-400 scale-110" : ""}
+                  ${
+                    !developerType
+                      ? "ring-4 ring-indigo-400/40 border-indigo-400 scale-110"
+                      : ""
+                  }
                 `}
               >
                 All
               </button>
 
-              {[...new Set(developers.map(dev => dev.developer).filter(Boolean))].map((type) => (
+              {[
+                ...new Set(
+                  developers.map((dev) => dev.developer).filter(Boolean)
+                ),
+              ].map((type) => (
                 <button
                   key={type}
                   onClick={() => {
-                    sessionStorage.setItem('developerType', type);
+                    sessionStorage.setItem("developerType", type);
                     window.location.reload();
                   }}
                   className={`
-                    px-5 py-2 rounded-full font-semibold shadow-lg transition-all duration-300
-                    border-2 border-transparent
-                   transition-all duration-300
+                    px-5 py-2 rounded-full font-semibold shadow-lg border-transparent transition-all duration-300
                   border-2 border-indigo-700 bg-gradient-to-r from-gray-800 to-indigo-900 text-white/80
                   hover:from-indigo-700 hover:to-gray-800 hover:text-white
-                    ${developerType === type ? "ring-4 ring-fuchsia-400/40 border-fuchsia-400 scale-110" : ""}
+                    ${
+                      developerType === type
+                        ? "ring-4 ring-fuchsia-400/40 border-fuchsia-400 scale-110"
+                        : ""
+                    }
                   `}
                   style={{
                     letterSpacing: "0.5px",
-                    boxShadow: developerType === type
-                      ? "0 4px 24px 0 rgba(139,92,246,0.25)"
-                      : "0 2px 8px 0 rgba(55,48,163,0.10)",
+                    boxShadow:
+                      developerType === type
+                        ? "0 4px 24px 0 rgba(139,92,246,0.25)"
+                        : "0 2px 8px 0 rgba(55,48,163,0.10)",
                   }}
                 >
                   {type}
@@ -367,8 +393,9 @@ const Hire = () => {
 
           {notification.show && (
             <div
-              className={`fixed top-5 right-5 p-4 rounded-md shadow-lg z-50 transition-all duration-300 ${notification.type === "success" ? "bg-green-500" : "bg-red-500"
-                }`}
+              className={`fixed top-5 right-5 p-4 rounded-md shadow-lg z-50 transition-all duration-300 ${
+                notification.type === "success" ? "bg-green-500" : "bg-red-500"
+              }`}
             >
               <p className="text-white font-medium">{notification.message}</p>
             </div>
@@ -407,13 +434,10 @@ const Hire = () => {
                 </div>
 
                 <form
-                  onSubmit={
-                    (e)=>{
-                      e.preventDefault();
-                      saveEdit(formData);
-                    }
-                      
-                  }
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    saveEdit(formData);
+                  }}
                 >
                   <div className="space-y-4">
                     <div>
@@ -426,8 +450,11 @@ const Hire = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         readOnly={!!editingDeveloper}
-                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${editingDeveloper ? "cursor-not-allowed opacity-70" : ""
-                          }`}
+                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${
+                          editingDeveloper
+                            ? "cursor-not-allowed opacity-70"
+                            : ""
+                        }`}
                         required
                       />
                     </div>
@@ -442,8 +469,11 @@ const Hire = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         readOnly={!!editingDeveloper}
-                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${editingDeveloper ? "cursor-not-allowed opacity-70" : ""
-                          }`}
+                        className={`w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 ${
+                          editingDeveloper
+                            ? "cursor-not-allowed opacity-70"
+                            : ""
+                        }`}
                         required
                       />
                     </div>
@@ -522,7 +552,10 @@ const Hire = () => {
                         className="w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                         placeholder="e.g. React, Node.js, MongoDB (comma-separated)"
                       />
-                      <p className="text-xs text-gray-400 mt-1">Enter skills as a comma-separated list (e.g., React, Node.js, Express).</p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        Enter skills as a comma-separated list (e.g., React,
+                        Node.js, Express).
+                      </p>
                     </div>
                   </div>
 
@@ -540,15 +573,16 @@ const Hire = () => {
                     </button>
                     <button
                       type="submit"
-                      className={`px-6 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-md text-white font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ${isLoading ? "opacity-75 cursor-not-allowed" : ""
-                        }`}
+                      className={`px-6 py-2 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-md text-white font-medium hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 ${
+                        isLoading ? "opacity-75 cursor-not-allowed" : ""
+                      }`}
                       disabled={isLoading}
                     >
                       {isLoading
                         ? "Processing..."
                         : editingDeveloper
-                          ? "Update Developer"
-                          : "Add Developer"}
+                        ? "Update Developer"
+                        : "Add Developer"}
                     </button>
                   </div>
                 </form>
@@ -594,7 +628,9 @@ const Hire = () => {
                   </button>
                   <button
                     onClick={() => handleDeleteDeveloper(deleteConfirmId)}
-                    className={`px-4 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors duration-300 ${isLoading ? "opacity-75 cursor-not-allowed" : ""}`}
+                    className={`px-4 py-2 bg-red-600 rounded-md text-white font-medium hover:bg-red-700 transition-colors duration-300 ${
+                      isLoading ? "opacity-75 cursor-not-allowed" : ""
+                    }`}
                     disabled={isLoading}
                   >
                     {isLoading ? "Deleting..." : "Delete Developer"}
@@ -613,8 +649,9 @@ const Hire = () => {
               {filteredDevelopers.map((dev) => (
                 <div
                   key={dev._id}
-                  className={`relative bg-black/20 backdrop-blur-md p-8 rounded-md shadow-2xl border border-cyan-800/50 group transition-all duration-500 transform hover:scale-105 hover:shadow-cyan-900/30 hover:shadow-lg overflow-hidden ${activeCard === dev._id ? "scale-105" : ""
-                    }`}
+                  className={`relative bg-black/20 backdrop-blur-md p-8 rounded-md shadow-2xl border border-cyan-800/50 group transition-all duration-500 transform hover:scale-105 hover:shadow-cyan-900/30 hover:shadow-lg overflow-hidden ${
+                    activeCard === dev._id ? "scale-105" : ""
+                  }`}
                   onMouseEnter={() => setActiveCard(dev._id)}
                   onMouseLeave={() => setActiveCard(null)}
                 >
@@ -635,9 +672,7 @@ const Hire = () => {
                         <h2 className="text-2xl font-extrabold text-white group-hover:text-cyan-300 transition-colors duration-300">
                           {dev.name}
                         </h2>
-                        <p className="text-blue-200 text-sm">
-                          {dev.developer}
-                        </p>
+                        <p className="text-blue-200 text-sm">{dev.developer}</p>
                       </div>
                     </div>
 
@@ -711,13 +746,17 @@ const Hire = () => {
                           dev.skills.map((skill, idx) => (
                             <span
                               key={idx}
-                              className={`px-3 py-1 bg-gradient-to-r ${getSkillColorClass(skill)} rounded-sm text-xs font-medium text-white inline-block transform transition-all duration-300 hover:shadow-md hover:shadow-cyan-800/50`}
+                              className={`px-3 py-1 bg-gradient-to-r ${getSkillColorClass(
+                                skill
+                              )} rounded-sm text-xs font-medium text-white inline-block transform transition-all duration-300 hover:shadow-md hover:shadow-cyan-800/50`}
                             >
                               {skill}
                             </span>
                           ))
                         ) : (
-                          <span className="text-gray-400 text-sm">No skills specified</span>
+                          <span className="text-gray-400 text-sm">
+                            No skills specified
+                          </span>
                         )}
                       </div>
                     </div>
