@@ -33,7 +33,7 @@ const Hire = () => {
   const fetchDevelopers = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:5000/api/users", {
+      const res = await fetch("https://s9r-back.onrender.com/api/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const Hire = () => {
 
     const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
 
-    fetch("http://localhost:5000/api/users", {
+    fetch("https://s9r-back.onrender.com/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +129,7 @@ const Hire = () => {
       const skillsArray = skillsInput.split(',').map(skill => skill.trim()).filter(skill => skill !== '');
 
       fetch(
-        `http://localhost:5000/api/users/${data.id}`,
+        `https://s9r-back.onrender.com/api/users/${data.id}`,
         {
           method: "PUT",
           headers: {
@@ -163,7 +163,7 @@ const Hire = () => {
   const handleDeleteDeveloper = (id) => {
     setIsLoading(true);
 
-    fetch(`http://localhost:5000/api/users/${id}`, {
+    fetch(`https://s9r-back.onrender.com/api/users/${id}`, {
       method: "DELETE",
     })
       .then(async (res) => {
